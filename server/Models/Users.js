@@ -26,6 +26,11 @@ const UserSchema = new Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Podcast'
     }],
+    subs: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Podcast'
+    }],
+    notifications: Boolean
 })
 
 UserSchema.pre('save', async function(next)  {

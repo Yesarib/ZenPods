@@ -17,14 +17,15 @@ const PodcastSchema = new Schema({
     imageUrl: {
         type: String,
     },
-    audioUrl: {
-        type: String,
-        required: true
-    },
     uploadedBy: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     },
+    episodes:[{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Episode'
+    }],
+    category:[String],
     createdAt: {
         type: Date,
         default: Date.now

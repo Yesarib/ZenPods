@@ -5,7 +5,9 @@ const createError = require("http-errors");
 const morgan = require('morgan');
 const cors = require('cors');
 const authRoutes = require('./Routes/Auth.js')
-
+const podcastRoutes = require('./Routes/Podcast.js')
+const episodeRoutes = require('./Routes/Episode.js')
+const reviewRoutes = require('./Routes/Review.js')
 
 dotenv.config()
 require('./Helpers/init_mongoDB.js')
@@ -24,13 +26,11 @@ app.use(cors());
 
 
 app.use('/auth', authRoutes);
+app.use('/api', podcastRoutes,episodeRoutes,reviewRoutes);
 
 
 
 app.use(async (req,res, next) => {
-    // const error = new Error("Not found")
-    // error.status = 404
-    // next(error)
     next(createError.NotFound());
 })
 
