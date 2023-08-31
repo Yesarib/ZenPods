@@ -10,7 +10,7 @@ module.exports = {
             }
             const secret = process.env.ACCESS_TOKEN_SECRET
             const options = {
-                expiresIn: "15s",
+                expiresIn: "1y",
                 issuer: "pickurpage.com",
                 audience: userId
             }

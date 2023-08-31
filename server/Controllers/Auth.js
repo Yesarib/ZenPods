@@ -27,7 +27,7 @@ const SignUp = async(req,res,next ) => {
     try {
         const { firstName, lastName, email, password } = req.body
         const doesExist = await User.findOne({ email:email})        
-        if (doesExist) throw createError.Conflict(`${result.email} is already been registered.`)
+        if (doesExist) throw createError.Conflict(`${email} is already been registered.`)
 
         const user = new User({
             firstName:firstName,
@@ -45,7 +45,25 @@ const SignUp = async(req,res,next ) => {
     }
 }
 
+const getUser = async (req, res, next) => {
+    try {
+        const user = await User.findById(req.payload.userId);
+        console.log(user);
+        if (!user) throw createError[404]("Not Found");
+
+        // Yeni bir access token üret ve kullanıcı verilerini döndür
+        const newAccessToken = await signAccessToken(user.id);
+        res.json({
+            accessToken: newAccessToken,
+            user
+        });
+    } catch (error) {
+        next(error);
+    }
+};
+
 module.exports = {
     SignIn,
     SignUp,
+    getUser
 }
