@@ -1,20 +1,9 @@
-import React, { useEffect, useState } from "react";
+/* eslint-disable react/prop-types */
+import { useState } from "react";
 import authService from "../Services/Auth";
 
-const Navbar = () => {
-    const [user, setUser] = useState(null);
+const Navbar = ({ user }) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-    const getUser = async () => {
-        const user = await authService.getCurrentUser();
-        if (user) {
-            setUser(user.data.user);
-        }
-    };
-
-    useEffect(() => {
-        getUser();
-    }, [user]);
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
@@ -22,11 +11,8 @@ const Navbar = () => {
 
     const logout = () => {
         authService.logout();
-        setUser(null);
-
     };
 
-    console.log(user);
 
     return (
         <div className="w-full flex justify-around items-center text-white mt-10">

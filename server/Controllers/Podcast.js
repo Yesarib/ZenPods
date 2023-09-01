@@ -35,6 +35,16 @@ const allPodcasts = async(req,res,next) => {
     }
 }
 
+const getPodcastById = async(req,res,next) => {
+    try {
+        const podcastId = req.params.podcastId;
+        const podcast = await Podcast.findOne({ _id: podcastId});
+        res.status(200).json(podcast);
+    } catch (error) {
+        next(error)
+    }
+}
+
 const getUserPodcasts = async(req,res,next) => {
     try {
         const { id } = req.params;
@@ -49,5 +59,6 @@ const getUserPodcasts = async(req,res,next) => {
 module.exports = {
     newPodcast,
     allPodcasts,
+    getPodcastById,
     getUserPodcasts,
 }
