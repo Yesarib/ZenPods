@@ -45,7 +45,12 @@ const getUserPodcastEpisodes = async(req,res,next) => {
         const podcast = await Podcast.findById(podcastId);
         if (!podcast) throw createError[404]('Podcast not found');     
         
-        res.status(201).json(podcast.episodes);
+        const episodeIds = podcast.episodes;
+
+        // episodeIds içindeki tüm bölümleri çekmek için MongoDB'de $in operatörünü kullanabilirsiniz.
+        const episodes = await Episode.find({ _id: { $in: episodeIds } });
+
+        res.status(200).json(episodes);
     } catch (error) {
         next(error)
     }

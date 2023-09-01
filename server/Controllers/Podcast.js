@@ -38,7 +38,7 @@ const allPodcasts = async(req,res,next) => {
 const getUserPodcasts = async(req,res,next) => {
     try {
         const { id } = req.params;
-        const podcasts = await Podcast.findById({id})
+        const podcasts = await Podcast.findById({ _id: id })
         res.status(200).json(podcasts); 
     } catch (error) {
         next(error)

@@ -5,6 +5,6 @@ const router = express.Router();
 
 router.post('/newPodcast', newPodcast);
 router.get('/allPodcast', allPodcasts);
-router.get('/getUserPodcasts', getUserPodcasts);
+router.get('/:id/getUserPodcasts', getUserPodcasts);
 
 module.exports = router

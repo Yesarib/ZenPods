@@ -4,8 +4,8 @@ const { newEpisode, getEpisodes, getUserPodcastEpisodes } = require('../Controll
 
 const router = express.Router();
 
-router.post('/newEpisode', newEpisode);
+router.post('/:podcastId/newEpisode', newEpisode);
 router.get('/getEpisodes', getEpisodes);
-router.get('/getUserPodcastEpisodes', getUserPodcastEpisodes);
+router.get('/:podcastId/getUserPodcastEpisodes', getUserPodcastEpisodes);
 
 module.exports = router

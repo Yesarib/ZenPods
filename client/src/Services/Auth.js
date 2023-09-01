@@ -64,7 +64,8 @@ const getCurrentUser = async() => {
 };
 
 const logout = () => {
-    localStorage.removeItem("user");
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("refreshToken");
     window.location.reload(); 
 };
 
