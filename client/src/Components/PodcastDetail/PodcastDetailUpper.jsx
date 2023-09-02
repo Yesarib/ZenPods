@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
-import podcastService from '../Services/Podcasts';
+import podcastService from '../../Services/Podcasts';
 
-const PodcastDetail = () => {
+const PodcastDetailUpper = () => {
     const { id } = useParams();
     console.log(id);
     const [podcast, setPodcast] = useState([]);
@@ -27,12 +27,12 @@ const PodcastDetail = () => {
     console.log(podcast);
 
     return (
-        <div className='flex flex-col text-white mt-16'>
+        <div className='flex flex-col text-white mt-10 ml-16'>
             <div>
                 -
             </div>
-            <div className='flex '>
-                <div className='mt-16 ml-20'>
+            <div className='flex ml-16'>
+                <div className='mt-16'>
                     <img src={podcast.imageUrl} alt={podcast.title} className='w-80 rounded-3xl' />
                 </div>
                 <div className='flex flex-col ml-4 mt-24'>
@@ -55,4 +55,4 @@ const PodcastDetail = () => {
     )
 }
 
-export default PodcastDetail
+export default PodcastDetailUpper

@@ -4,6 +4,7 @@ const episodeSchema = new mongoose.Schema({
     title: String,
     description: String,
     audioUrl: String,
+    imageUrl:{type:String, default:""},
     publishedAt: { type: Date, default: Date.now },
     reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Review' }],
     listenCount: { type: Number, default: 0 },

@@ -5,7 +5,7 @@ const createError = require('http-errors')
 const newEpisode = async (req, res, next) => {
     try {
         const { podcastId } = req.params;
-        const { title, description, audioUrl } = req.body;
+        const { title, description, imageUrl, audioUrl } = req.body;
 
         const podcast = await Podcast.findById(podcastId);
         if (!podcast) throw createError[404]('Podcast not found');
@@ -13,6 +13,7 @@ const newEpisode = async (req, res, next) => {
         const newEpisode = new Episode({
             title: title,
             description: description,
+            imageUrl:imageUrl,
             audioUrl: audioUrl
         });
 
@@ -39,7 +40,7 @@ const getEpisodes = async(req,res,next) => {
     }
 }
 
-const getUserPodcastEpisodes = async(req,res,next) => {
+const getPodcastEpisodesById = async(req,res,next) => {
     try {
         const { podcastId } = req.params;
         const podcast = await Podcast.findById(podcastId);
@@ -59,5 +60,5 @@ const getUserPodcastEpisodes = async(req,res,next) => {
 module.exports = {
     newEpisode,
     getEpisodes,
-    getUserPodcastEpisodes,
+    getPodcastEpisodesById,
 }

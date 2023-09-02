@@ -8,11 +8,11 @@ const Sidebar = ({ user }) => {
         <div className='w-11/12 text-white font-sans mt-5 ml-7 flex flex-col justify-center items-center'>
             <div className='w-full h-36 bg-[#000511] rounded-3xl'>
                 <div className='flex '>
-                    <img src="src/assets/home.png" alt="home" className='w-8 mt-4 ml-5'/>
+                    <img src="/home.png" alt="home" className='w-8 mt-4 ml-5'/>
                     <h2 className='mt-5 ml-5 text-[18px] font-medium'> Home </h2>
                 </div>
                 <div className='flex'>
-                    <img src="src/assets/search.png" alt="home" className='w-6 h-6 mt-7 ml-6'/>
+                    <img src="/search.png" alt="home" className='w-6 h-6 mt-7 ml-6'/>
                     <h2 className='mt-6 ml-5 text-[18px] font-medium'> Search </h2>
                 </div>
             </div>
@@ -20,7 +20,7 @@ const Sidebar = ({ user }) => {
             <div className='w-full bg-[#000511] rounded-3xl mt-7 '>
                 <div className='w-full flex justify-between'>
                     <div className='flex'>
-                        <img src="src/assets/books.png" alt="books" className='w-8 ml-4 mt-3' />
+                        <img src="/books.png" alt="books" className='w-8 ml-4 mt-3' />
                         <h2 className='mt-3.5 ml-5 text-[18px] font-medium'> Your Library </h2>
                     </div>
                     <div className='mt-2 text-[24px] font-medium'>
@@ -51,7 +51,7 @@ const Sidebar = ({ user }) => {
                         </div>
                         <div className='flex justify-between mt-2'>
                             <div className='mt-3'>
-                                <img src="src/assets/search.png" alt="search" className='w-5 font-medium ml-2' />
+                                <img src="/search.png" alt="search" className='w-5 font-medium ml-2' />
                             </div>
                             <div className='mt-3 mr-5'>
                                 Sort By
