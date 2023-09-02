@@ -26,9 +26,24 @@ const getEpisodes = async() => {
     }
 }
 
+const getEpisodesById = async(id) => {
+    try {
+        return await axios.get(BASE_URL + "/api/getEpisodesById", {
+            id,
+        }).then((res) => {
+            if (res) {
+                return res.data
+            }
+        })
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 
 const episodesService = {
     getPodcastEpisodesById,
+    getEpisodesById,
     getEpisodes,
 }
 

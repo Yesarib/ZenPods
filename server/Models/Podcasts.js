@@ -7,14 +7,17 @@ const Schema = mongoose.Schema
 const PodcastSchema = new Schema({
     title: {
         type: String,
+        default:"My Podcast",
         required: true,
         trim: true
     },
     description: {
         type: String,
+        default:"Podcast list description",
         required: true
     },
     imageUrl: {
+        default:"https://media.timeout.com/images/105881167/750/422/image.jpg",
         type: String,
     },
     uploadedBy: {
@@ -25,7 +28,7 @@ const PodcastSchema = new Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Episode'
     }],
-    category:[String],
+    category:[{type:String,}],
     createdAt: {
         type: Date,
         default: Date.now

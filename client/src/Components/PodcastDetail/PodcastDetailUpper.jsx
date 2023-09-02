@@ -4,7 +4,6 @@ import podcastService from '../../Services/Podcasts';
 
 const PodcastDetailUpper = () => {
     const { id } = useParams();
-    console.log(id);
     const [podcast, setPodcast] = useState([]);
 
     const getPodcast = async () => {
@@ -24,8 +23,6 @@ const PodcastDetailUpper = () => {
         getPodcast();
     }, []);
 
-    console.log(podcast);
-
     return (
         <div className='flex flex-col text-white mt-10 ml-16'>
             <div>
@@ -36,8 +33,8 @@ const PodcastDetailUpper = () => {
                     <img src={podcast.imageUrl} alt={podcast.title} className='w-80 rounded-3xl' />
                 </div>
                 <div className='flex flex-col ml-4 mt-24'>
-                    <h1 className='text-[16px] font-medium '> {podcast.title} </h1>
-                    <h1 className='text-[60px] font-bold'> Release Radar </h1>
+                    <h1 className='text-[16px] font-medium '> Podcast List </h1>
+                    <h1 className='text-[60px] font-bold'> {podcast.title} </h1>
                     <p className='ml-1 text-[15px]'> {podcast.description} </p>
                 </div>
             </div>

@@ -7,6 +7,7 @@ import Sidebar from './Components/Sidebar'
 import authService from './Services/Auth'
 import Footbar from './Components/Footbar'
 import Navbar from './Components/Navbar'
+import PodcastList from './Pages/PodcastList'
 
 
 
@@ -35,6 +36,7 @@ const App = () => {
           <Routes>
             <Route path='/' element={ <Home /> } />
             <Route path='/podcast/:id' element={ <Podcast /> } />
+            <Route path='/podcastlist/:id' element={ <PodcastList /> } />
             <Route path='/login' element={ <Login /> } />
           </Routes>
         </div>

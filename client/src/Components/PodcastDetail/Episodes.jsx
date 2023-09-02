@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react'
 import episodesService from '../../Services/Episode';
 import { useParams } from 'react-router-dom';
 
-const Episodes = ({podcasts}) => {
+const Episodes = () => {
     const [episodes, setEpisodes] = useState([]);
     const { id } = useParams();
 

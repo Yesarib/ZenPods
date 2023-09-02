@@ -12,6 +12,7 @@ const Login = () => {
         try {
             await authService.signIn(email,password).then(() => {
                 navigate("/")
+                window.location.reload();
             })
             .catch((err) => console.log(err))
         } catch (error) {

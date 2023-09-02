@@ -1,8 +1,14 @@
 /* eslint-disable react/prop-types */
 
+import podcastListService from "../Services/PodcastList"
+import PodcastList from "./PodcastList";
+
 const Sidebar = ({ user }) => {
 
-    console.log(user);
+    const newPodcastList = async() => {
+        const data = await podcastListService.newPodcastList(user._id);
+        console.log(data);
+    }
 
     return (
         <div className='w-11/12 text-white font-sans mt-5 ml-7 flex flex-col justify-center items-center'>
@@ -24,7 +30,7 @@ const Sidebar = ({ user }) => {
                         <h2 className='mt-3.5 ml-5 text-[18px] font-medium'> Your Library </h2>
                     </div>
                     <div className='mt-2 text-[24px] font-medium'>
-                        <a href={user ? "/#" : "/login "} className='text-[14px] mr-3'> + Create Podcastlist </a>
+                        <a href={user ? "/" : "/login "} onClick={newPodcastList} className='text-[14px] mr-3'> + Create Podcastlist </a>
                     </div> 
                 </div>
 
@@ -46,8 +52,8 @@ const Sidebar = ({ user }) => {
 
                 {user && (
                     <div className='flex flex-col mt-16 ml-3'>
-                        <div className="w-20 bg-gray-800 rounded-xl">
-                            <h2 className='ml-2 font-medium tracking-wider'> Playlists </h2>
+                        <div>
+                            <h2 className='ml-2 font-medium tracking-wider'> Your Podcast List </h2>
                         </div>
                         <div className='flex justify-between mt-2'>
                             <div className='mt-3'>
@@ -58,7 +64,7 @@ const Sidebar = ({ user }) => {
                             </div>
                         </div>
                         <div className='mt-10'>
-                            Podcast List
+                            <PodcastList user={user}/>
                         </div>
                     </div>
                 )}

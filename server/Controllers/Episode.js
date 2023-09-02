@@ -40,6 +40,24 @@ const getEpisodes = async(req,res,next) => {
     }
 }
 
+const getEpisodesById = async (req, res, next) => {
+    try {
+        const { ids } = req.body;
+        
+        const episodesData = [];
+        for (const id of ids) {
+            const episode = await Episode.findById(id);
+            if (!episode) {
+            throw createError[404]("Episode not found");
+            }
+            episodesData.push(episode);
+        }
+    
+        res.status(200).json(episodesData);
+        } catch (error) {
+        next(error);
+    }
+};
 const getPodcastEpisodesById = async(req,res,next) => {
     try {
         const { podcastId } = req.params;
@@ -60,5 +78,6 @@ const getPodcastEpisodesById = async(req,res,next) => {
 module.exports = {
     newEpisode,
     getEpisodes,
+    getEpisodesById,
     getPodcastEpisodesById,
 }
