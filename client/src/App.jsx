@@ -8,6 +8,7 @@ import authService from './Services/Auth'
 import Footer from './Components/Footer'
 import Navbar from './Components/Navbar'
 import PodcastList from './Pages/PodcastList'
+import EpisodeCard from './Components/EpisodeCard'
 
 
 
@@ -25,23 +26,29 @@ const App = () => {
     getUser();
   },[])
   return (
-    <div className='flex'>
-      <Router>
-        <div className='w-1/4 flex flex-col h-screen rounded-xl'>
-          <Sidebar user={user} />
-          { !user && <Footer /> }
-        </div>
-        <div className='w-3/4 bg-gradient-to-b from-[#010c2d] rounded-xl'>
-          <Navbar user={user}/>
-          <Routes>
-            <Route path='/' element={ <Home /> } />
-            <Route path='/podcast/:id' element={ <Podcast /> } />
-            <Route path='/podcastlist/:id' element={ <PodcastList /> } />
-            <Route path='/login' element={ <Login /> } />
-          </Routes>
-        </div>
-      </Router>
-    </div>
+    <>
+      <div className='flex'>
+        <Router>
+          <div className='w-1/4 flex flex-col h-screen rounded-xl'>
+            <Sidebar user={user} />
+            { !user && <Footer /> }
+          </div>
+          <div className='flex flex-col w-3/4 bg-gradient-to-b from-[#010c2d] rounded-xl'>
+            <Navbar user={user}/>
+            <Routes>
+              <Route path='/' element={ <Home /> } />
+              <Route path='/podcast/:id' element={ <Podcast /> } />
+              <Route path='/podcastlist/:id' element={ <PodcastList /> } />
+              <Route path='/login' element={ <Login /> } />
+            </Routes>
+          </div>
+        </Router>
+      </div>
+      <div className='fixed bottom-0 left-0 w-full'>
+        <EpisodeCard /> {/* EpisodeCard'ı sabit bir şekilde altta yerleştirin */}
+      </div>
+
+    </>
   )
 }
 
