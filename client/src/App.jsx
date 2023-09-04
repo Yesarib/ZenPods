@@ -5,7 +5,7 @@ import Login from './Pages/Login'
 import Podcast from './Pages/Podcast'
 import Sidebar from './Components/Sidebar'
 import authService from './Services/Auth'
-import Footbar from './Components/Footbar'
+import Footer from './Components/Footer'
 import Navbar from './Components/Navbar'
 import PodcastList from './Pages/PodcastList'
 
@@ -29,7 +29,7 @@ const App = () => {
       <Router>
         <div className='w-1/4 flex flex-col h-screen rounded-xl'>
           <Sidebar user={user} />
-          { !user && <Footbar /> }
+          { !user && <Footer /> }
         </div>
         <div className='w-3/4 bg-gradient-to-b from-[#010c2d] rounded-xl'>
           <Navbar user={user}/>

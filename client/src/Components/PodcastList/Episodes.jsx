@@ -2,6 +2,7 @@
 import React from 'react'
 
 const Episodes = ({episodes}) => {
+    console.log(episodes);
     return (
         <>
             {!episodes && (
@@ -10,7 +11,7 @@ const Episodes = ({episodes}) => {
                 </div>
             )}
             {episodes && (
-                <div className='w-full mt-10 ml-10'>
+                <div className='w-full mt-10 ml-10 text-white'>
                 <table cellPadding="15" className="table-fixed">
                     <thead className='text-center'>
                         <tr>

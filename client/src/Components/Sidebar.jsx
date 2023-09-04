@@ -7,6 +7,7 @@ const Sidebar = ({ user }) => {
 
     const newPodcastList = async() => {
         const data = await podcastListService.newPodcastList(user._id);
+        window.location.reload();
         console.log(data);
     }
 
@@ -15,7 +16,7 @@ const Sidebar = ({ user }) => {
             <div className='w-full h-36 bg-[#000511] rounded-3xl'>
                 <div className='flex '>
                     <img src="/home.png" alt="home" className='w-8 mt-4 ml-5'/>
-                    <h2 className='mt-5 ml-5 text-[18px] font-medium'> Home </h2>
+                    <a href="/" className='mt-5 ml-5 text-[18px] font-medium'> Home </a>
                 </div>
                 <div className='flex'>
                     <img src="/search.png" alt="home" className='w-6 h-6 mt-7 ml-6'/>

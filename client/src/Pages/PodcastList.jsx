@@ -13,12 +13,11 @@ const PodcastList = () => {
     const getPodcastList = async() => {
         try {
             const data = await podcastListService.getPodcastListById(id);
-            console.log(data);
             if (data) {
                 setPodcastList(data)
                 const episodeIds = data.episodes;
 
-                const episodeData = await episodesService.getEpisodesById(episodeIds);
+                const episodeData = await episodesService.getEpisodesById(episodeIds || []);
                 setEpisodes(episodeData);
             }            
         } catch (error) {
@@ -29,9 +28,7 @@ const PodcastList = () => {
 
     useEffect(() => {
         getPodcastList();
-    },[])
-
-    console.log(episodes);
+    },[id])
 
 
     return (

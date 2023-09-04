@@ -42,8 +42,9 @@ const getEpisodes = async(req,res,next) => {
 
 const getEpisodesById = async (req, res, next) => {
     try {
-        const { ids } = req.body;
-        
+        console.log(req.query);
+        const ids = req.query.id
+        console.log("IDLER => " + ids);
         const episodesData = [];
         for (const id of ids) {
             const episode = await Episode.findById(id);
@@ -58,6 +59,7 @@ const getEpisodesById = async (req, res, next) => {
         next(error);
     }
 };
+
 const getPodcastEpisodesById = async(req,res,next) => {
     try {
         const { podcastId } = req.params;
