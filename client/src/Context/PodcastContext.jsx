@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
-
-import React,{ createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useState, useEffect } from "react";
 
 const PodcastContext = createContext();
 
@@ -9,10 +8,15 @@ export const usePodcastContext = () => {
 };
 
 export const PodcastProvider = ({ children }) => {
-    const [nowPlayingPodcast, setNowPlayingPodcast] = useState(null);
+    const [nowPlayingPodcast, setNowPlayingPodcast] = useState(
+        JSON.parse(localStorage.getItem("nowPlayingPodcast")) || null
+    );
+
+    useEffect(() => {
+        localStorage.setItem("nowPlayingPodcast", JSON.stringify(nowPlayingPodcast));
+    }, [nowPlayingPodcast]);
 
     const startPodcast = (podcast) => {
-        // Podcasti başlatma işlemi
         setNowPlayingPodcast(podcast);
     };
 

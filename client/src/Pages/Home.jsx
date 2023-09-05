@@ -5,7 +5,6 @@ import podcastService from '../Services/Podcasts'
 const Home = () => {
   const [podcasts, setPodcasts] = useState([]);
 
-  
 
   const getPodcasts = async () => {
     const podcasts = await podcastService.getPodcasts();

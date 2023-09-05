@@ -5,18 +5,18 @@ const EpisodeCard = () => {
   const { nowPlayingPodcast } = usePodcastContext(); // Şu anda çalınan podcast bilgilerini alın
     console.log(nowPlayingPodcast);
 return (
-    <div className='text-white mt-36 text-center mb-3'>
+    <div className='text-white mt-36 text-center mb-3 '>
         {nowPlayingPodcast ? (
-            <div className='flex justify-between items-center text-center ml-2'>
-                <div className='flex'>
+            <div className='flex justify-between items-center text-center  ml-2'>
+                <div className='flex w-1/3'>
                     <img src={nowPlayingPodcast.imageUrl} alt={nowPlayingPodcast.title} className='w-16' />
                     <div className='flex flex-col text-start ml-5'>
                         <h1 className='font-medium '> {nowPlayingPodcast.title} </h1>
-                        <h1 className='font-medium text-gray-400'> {nowPlayingPodcast.description} </h1>
+                        <h1 className='font-medium text-gray-400'> {nowPlayingPodcast.publishedBy} </h1>
                     </div>
                 </div>
 
-                <div className='flex flex-col justify-center items-center text-center' >
+                <div className='flex flex-col text-center justify-center items-center w-1/3' >
                     <div className='flex'>
                         Medya işaretleri
                     </div>
@@ -29,7 +29,7 @@ return (
                     </div>
                 </div>
 
-                <div className='flex'>
+                <div className='flex w-1/3 justify-center items-center text-center'>
                     <div> İşaretler </div>
                 </div>
 

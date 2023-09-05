@@ -6,7 +6,7 @@ const Podcast = () => {
 
     return (
         <div className='text-white w-full flex'>
-            <div className="w-full">
+            <div className="w-full mb-10">
                 <PodcastDetailUpper />
                 <Episodes />
             </div>

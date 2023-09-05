@@ -5,7 +5,7 @@ const createError = require('http-errors')
 const newEpisode = async (req, res, next) => {
     try {
         const { podcastId } = req.params;
-        const { title, description, imageUrl, audioUrl } = req.body;
+        const { title, description, imageUrl, audioUrl, publishedBy } = req.body;
 
         const podcast = await Podcast.findById(podcastId);
         if (!podcast) throw createError[404]('Podcast not found');
@@ -14,7 +14,8 @@ const newEpisode = async (req, res, next) => {
             title: title,
             description: description,
             imageUrl:imageUrl,
-            audioUrl: audioUrl
+            audioUrl: audioUrl,
+            publishedBy:publishedBy
         });
 
         podcast.episodes.push(newEpisode);
