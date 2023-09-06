@@ -25,9 +25,6 @@ const PodcastDetailUpper = () => {
 
     return (
         <div className='flex flex-col text-white mt-10 ml-16'>
-            <div>
-                -
-            </div>
             <div className='flex ml-16'>
                 <div className='mt-16'>
                     <img src={podcast.imageUrl} alt={podcast.title} className='w-80 rounded-3xl' />

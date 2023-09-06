@@ -17,3 +17,19 @@
 .rhap_volume-button{
     color: white;
 }
+
+.bg-gradient{
+    background: rgb(6,170,105);
+    background: linear-gradient(180deg, rgba(6,170,105,1) 0%, rgba(0,0,0,1) 60%);
+}
+
+
+.table-config{
+    background-color: transparent;
+}
+
+.table-h{
+    color: white;
+    font-size: 24px;
+    font-weight: 500;
+}

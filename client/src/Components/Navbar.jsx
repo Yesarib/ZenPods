@@ -15,20 +15,19 @@ const Navbar = ({ user }) => {
 
 
     return (
-        <div className="w-full flex justify-around items-center text-white mt-10">
+        <div className="w-full flex justify-between items-center text-white mt-10">
             <div className="justify-center items-center text-center">
-                <h2 className="text-[20px] font-medium tracking-widest">
-                    
-                    PodConnect
+                <h2 className="text-[36px] ml-20 font-medium tracking-widest">
+                    ZenPods
                 </h2>
             </div>
-            <div className="flex justify-evenly">
+            <div className="flex justify-evenly mr-20">
             {user && (
                     <div className="relative group">
                         <button
                             id="menuButton"
                             onClick={toggleMenu}
-                            className="text-white group-hover:text-gray-600"
+                            className="text-white text-[17px] group-hover:text-gray-600"
                         >
                             {user.firstName}
                         </button>

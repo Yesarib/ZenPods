@@ -40,11 +40,11 @@ const getPodcastListById = async(id) => {
     }
 }
 
-const addEpisodeToPodcastList = async(podcsatId, episodeId) => {
+const addEpisodeToPodcastList = async(playlistId, episodeId) => {
     try {
         return await axios.post(BASE_URL + "/api/postEpisodeToPodcastList", {
-            podcsatId,
-            episodeId
+            podcastListId:playlistId,
+            episodeId:episodeId
         }).then((res) => {
             if (res) {
                 return res.data

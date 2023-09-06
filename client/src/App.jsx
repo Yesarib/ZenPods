@@ -30,15 +30,16 @@ const App = () => {
       <div className='flex'>
         <div className='w-full h-screen flex mb-10'>
           <Router>
-            <div className='w-1/4 flex flex-col h-screen rounded-xl'>
+            <div className='w-1/4 flex flex-col h-screen rounded-xl '>
               <Sidebar user={user} />
               { !user && <Footer /> }
             </div>
-            <div className='flex flex-col w-3/4 ml-5 bg-gradient-to-b from-[#010c2d] rounded-xl'>
+            <div className='flex flex-col w-3/4 ml-5 bg-gradient rounded-xl'>
               <Navbar user={user}/>
+              
               <Routes>
                 <Route path='/' element={ <Home /> } />
-                <Route path='/podcast/:id' element={ <Podcast /> } />
+                <Route path='/podcast/:id' element={ <Podcast user={user}/> } />
                 <Route path='/podcastlist/:id' element={ <PodcastList /> } />
                 <Route path='/login' element={ <Login /> } />
               </Routes>
