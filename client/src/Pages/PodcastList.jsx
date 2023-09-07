@@ -7,10 +7,22 @@ import episodesService from '../Services/Episode';
 
 const PodcastList = () => {
     const [podcastList, setPodcastList] = useState([]);
+    const [playlists, setPlaylists] = useState([]);
     const [episodes, setEpisodes] = useState([]);
     const { id } = useParams();
 
-    const getPodcastList = async() => {
+    const getPodcastLits = async() => {
+        try {
+            const data = await podcastListService.getUserPodcastList();
+            if (data) {
+                setPlaylists(data);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    const getPodcastListById = async() => {
         try {
             const data = await podcastListService.getPodcastListById(id);
             if (data) {
@@ -27,14 +39,14 @@ const PodcastList = () => {
     }
 
     useEffect(() => {
-        getPodcastList();
+        getPodcastListById();
     },[id])
 
 
     return (
         <div>
             <PodcastListDetailUpper podcastlist={podcastList}/>
-            <Episodes episodes={episodes} />
+            <Episodes episodes={episodes} playlist={playlists} />
         </div>
     )
 }

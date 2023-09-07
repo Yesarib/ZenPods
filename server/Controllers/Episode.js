@@ -43,7 +43,6 @@ const getEpisodes = async(req,res,next) => {
 
 const getEpisodesById = async (req, res, next) => {
     try {
-        console.log(req.query);
         const ids = req.query.id
         console.log("IDLER => " + ids);
         const episodesData = [];

@@ -55,11 +55,30 @@ const addEpisodeToPodcastList = async(playlistId, episodeId) => {
     }
 }
 
+const updatePodcastlist = async(playlistId, title, description, imageUrl, podcastlist) => {
+    try {
+        const updatedImageUrl = imageUrl || podcastlist.imageUrl;
+
+        return await axios.put(BASE_URL + "/api/updatePodcastList/" + playlistId, {
+            title:title,
+            description:description,
+            imageUrl:updatedImageUrl,
+        }).then((res) => {
+            if (res) {
+                return res.data
+            }
+        })
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 const podcastListService = {
     newPodcastList,
     getUserPodcastList,
     getPodcastListById,
     addEpisodeToPodcastList,
+    updatePodcastlist,
 }
 
 export default podcastListService;
