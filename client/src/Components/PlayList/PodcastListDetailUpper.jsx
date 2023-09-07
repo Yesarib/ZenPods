@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import React, { useState, useRef, useEffect } from 'react';
 import podcastListService from '../../Services/PodcastList';
@@ -9,6 +10,7 @@ const PodcastListDetailUpper = ({ podcastlist }) => {
     const [imageUrl, setImageUrl] = useState("")
 
     const popUpRef = useRef(null);
+
     const handleEditClick = () => {
         setIsEditing(true);
     };
@@ -57,11 +59,15 @@ const PodcastListDetailUpper = ({ podcastlist }) => {
             </div>
 
             <div className='flex'>
-                <div className='flex items-center mt-10 ml-20'>
-                    <div className='w-16 h-16 bg-sky-800 rounded-full'> </div>
+                <div className='flex items-center mt-10 ml-20 justify-center'>
+                    <div className='w-16 h-16 bg-sky-800 rounded-full flex justify-center items-center cursor-pointer transform hover:scale-110'>
+                        <img className='w-10 ml-1 ' src="/play.png" alt="play" />
+                    </div>
                 </div>
-                <div className='flex items-center mt-10 ml-10'>
-                    <div className='w-16 h-16 bg-sky-800 rounded-full'></div>
+                <div className='flex items-center mt-10 ml-10 '>
+                    <div className='flex items-center justify-center text-center'>
+                        <h1 className='text-[48px] text-[#727272] cursor-pointer transform hover:text-white '> ... </h1>
+                    </div>
                 </div>
             </div>
 

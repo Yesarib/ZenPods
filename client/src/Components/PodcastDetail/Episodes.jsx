@@ -96,7 +96,7 @@ const Episodes = ({playlist}) => {
                         <tr
                             key={episode._id}
                             onClick={() => handleStartPodcast(episode)}
-                            className='hover:bg-gray-950 hover:rounded-2xl'
+                            className='hover:bg-[#292929]'
                         >
                             <td className='w-1/12 text-start px-0'> {index} </td>
                             <td className="w-5/12 text-start px-0">

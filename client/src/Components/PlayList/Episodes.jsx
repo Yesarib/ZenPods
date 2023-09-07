@@ -83,7 +83,7 @@ const Episodes = ({episodes,playlist}) => {
                     </thead>
                     <tbody className='w-full text-center'>
                         {episodes.map((episode,index) => (
-                            <tr key={episode._id}>
+                            <tr key={episode._id} className='hover:bg-[#292929]'>
                                 <td className='w-1/12 text-start px-0'> {index} </td>
                                 <td className="w-5/12 text-start px-0">
                                     <div className='flex'>

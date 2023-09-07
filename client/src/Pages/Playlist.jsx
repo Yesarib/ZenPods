@@ -1,8 +1,8 @@
 import React, { useState, useEffect} from 'react'
 import { useParams } from 'react-router-dom'
 import podcastListService from '../Services/PodcastList'
-import PodcastListDetailUpper from '../Components/PodcastList/PodcastListDetailUpper';
-import Episodes from '../Components/PodcastList/Episodes';
+import PodcastListDetailUpper from  '../Components/PlayList/PodcastListDetailUpper'
+import Episodes from '../Components/PlayList/Episodes';
 import episodesService from '../Services/Episode';
 
 const PodcastList = () => {
@@ -40,6 +40,7 @@ const PodcastList = () => {
 
     useEffect(() => {
         getPodcastListById();
+        getPodcastLits();
     },[id])
 
 
