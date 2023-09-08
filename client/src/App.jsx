@@ -9,6 +9,7 @@ import Footer from './Components/Footer'
 import Navbar from './Components/Navbar'
 import Playlist from './Pages/Playlist'
 import EpisodeCard from './Components/EpisodeCard'
+import Profile from './Pages/Profile'
 
 
 
@@ -41,13 +42,14 @@ const App = () => {
                 <Route path='/' element={ <Home /> } />
                 <Route path='/podcast/:id' element={ <Podcast user={user}/> } />
                 <Route path='/podcastlist/:id' element={ <Playlist /> } />
+                <Route path='/profile' element={ <Profile user={user} /> } />
                 <Route path='/login' element={ <Login /> } />
               </Routes>
             </div>
           </Router>
         </div>
       </div>
-      <div className='sticky bottom-0 left-0 w-full'>
+      <div className='sticky bottom-0 left-0 w-full mt-10'>
         <EpisodeCard /> 
       </div>
 

@@ -88,7 +88,7 @@ const Episodes = ({episodes,playlist}) => {
                                 <td className="w-5/12 text-start px-0">
                                     <div className='flex'>
                                         <div className='flex justify-start items-start'>
-                                            <img src={episode.imageUrl} alt={episode.title} className='w-28 h-24 max-w-[36rem] max-h-[36rem] rounded-md object-cover' />
+                                            <img src={episode.imageUrl} alt={episode.title} className='w-20 h-16 max-w-[36rem] max-h-[36rem] rounded-md object-cover' />
                                         </div>
                                         <div className='flex flex-col justify-center ml-7'>
                                             <h1 className='text-start justify-start items-start text-[17px] font-medium'> {episode.title} </h1>
@@ -111,8 +111,7 @@ const Episodes = ({episodes,playlist}) => {
                                                 <div className={`absolute ${isMenuOpen === episode._id ? 'block' : 'hidden'} ml-10 w-48 bg-gray-800`} style={{ bottom: '100%' }}>
                                                     <button
                                                         className='mt-2 text-[17px] w-full hover:bg-slate-700'
-                                                        onMouseEnter={() => togglePlaylistMenu(episode._id)} // Üzerine geldiğinizde playlist menüsünü açın
-                                                        //onMouseLeave={() => togglePlaylistMenu(null)} // Üzerinden çıktığınızda playlist menüsünü kapatın
+                                                        onMouseEnter={() => togglePlaylistMenu(episode._id)} 
                                                     >
                                                         Add To Playlist
                                                     </button>

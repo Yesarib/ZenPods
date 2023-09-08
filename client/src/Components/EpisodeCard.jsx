@@ -20,7 +20,7 @@ const EpisodeCard = () => {
             {nowPlayingPodcast ? (
                 <div className='flex justify-between items-center text-center  ml-2'>
                     <div className='flex w-1/3'>
-                        <img src={nowPlayingPodcast.imageUrl} alt={nowPlayingPodcast.title} className='w-16' />
+                        <img src={nowPlayingPodcast.imageUrl} alt={nowPlayingPodcast.title} className='w-20 rounded-sm' />
                         <div className='flex flex-col text-start ml-5'>
                             <h1 className='font-medium '> {nowPlayingPodcast.title} </h1>
                             <h1 className='font-medium text-gray-400'> {nowPlayingPodcast.publishedBy} </h1>

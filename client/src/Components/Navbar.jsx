@@ -34,7 +34,7 @@ const Navbar = ({ user }) => {
                         <div
                             className={`absolute ${isMenuOpen ? 'block' : 'hidden'} mt-2 py-2 bg-white border border-gray-200 shadow-lg rounded-lg`}
                         >
-                            <a href="#" className="block px-4 py-2 text-gray-800 hover:bg-gray-200">
+                            <a href="/profile" className="block px-4 py-2 text-gray-800 hover:bg-gray-200">
                                 Profil
                             </a>
                             <a href="#" className="block px-4 py-2 text-gray-800 hover:bg-gray-200" onClick={logout}>

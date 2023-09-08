@@ -30,6 +30,10 @@ const UserSchema = new Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Podcast'
     }],
+    profileImage: [{
+        type:String,
+        default:"https://www.vhv.rs/dpng/d/555-5558210_z-letter-png-logo-transparent-png.png"
+    }],
     notifications: Boolean
 })
 

@@ -105,7 +105,7 @@ const Episodes = ({playlist}) => {
                                         <img
                                             src={episode.imageUrl}
                                             alt={episode.title}
-                                            className='w-28 h-24 max-w-[36rem] max-h-[36rem] rounded-md object-cover'
+                                            className='w-20 h-16 max-w-[36rem] max-h-[36rem] rounded-md object-cover'
                                         />
                                     </div>
                                     <div className='flex flex-col justify-center ml-7'>
