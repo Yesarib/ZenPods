@@ -28,7 +28,10 @@ const PodcastSchema = new Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Episode'
     }],
-    category:[{type:String,}],
+    category: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Category',
+    }],
     createdAt: {
         type: Date,
         default: Date.now
