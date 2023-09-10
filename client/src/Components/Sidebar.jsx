@@ -20,7 +20,7 @@ const Sidebar = ({ user }) => {
                 </div>
                 <div className='flex'>
                     <img src="/search.png" alt="home" className='w-6 h-6 mt-7 ml-6'/>
-                    <h2 className='mt-6 ml-5 text-[18px] font-medium'> Search </h2>
+                    <a href="/search" className='mt-6 ml-5 text-[18px] font-medium'> Search </a>
                 </div>
             </div>
 

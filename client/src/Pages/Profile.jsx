@@ -28,7 +28,7 @@ const Profile = ({user}) => {
 
     return (
         <div className='text-white flex flex-col w-full'>
-            <div className='flex'>
+            <div className='flex ml-10'>
                 <div className='ml-12 mt-10'>
                     <img src={user?.profileImage} alt={user.firstName} className='w-48 rounded-full'/>
                 </div>
@@ -39,7 +39,7 @@ const Profile = ({user}) => {
                 </div>
             </div>
 
-            <div className='flex flex-col w-full mt-32'>
+            <div className='flex flex-col w-full mt-32 ml-10'>
                 <div>
                     <h1 className='text-[28px] font-medium ml-10'> Playlists </h1>
                 </div>
@@ -60,7 +60,7 @@ const Profile = ({user}) => {
                 </div>
             </div>
 
-            <div className='flex flex-col w-full mt-32'>
+            <div className='flex flex-col w-full mt-32 ml-10'>
                 <div>
                     <h1 className='text-[28px] font-medium ml-10'> Subscriptions </h1>
                 </div>

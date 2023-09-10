@@ -16,6 +16,18 @@ const newPodcastList = async(id, title, imageUrl) => {
     }
 }
 
+const getPodcastlists = async() => {
+    try {
+        return await axios.get(BASE_URL + '/api/getPodcastlists').then((res) => {
+            if(res) {
+                return res.data
+            }
+        })
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 const getUserPodcastList = async(id) => {
     try {
         return await axios.get(BASE_URL + "/api/getUserPodcastList/" + id).then((res) => {
@@ -77,6 +89,7 @@ const podcastListService = {
     newPodcastList,
     getUserPodcastList,
     getPodcastListById,
+    getPodcastlists,
     addEpisodeToPodcastList,
     updatePodcastlist,
 }

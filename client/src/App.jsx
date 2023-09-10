@@ -10,6 +10,7 @@ import Navbar from './Components/Navbar'
 import Playlist from './Pages/Playlist'
 import EpisodeCard from './Components/EpisodeCard'
 import Profile from './Pages/Profile'
+import Search from './Pages/Search'
 
 
 
@@ -35,14 +36,14 @@ const App = () => {
               <Sidebar user={user} />
               { !user && <Footer /> }
             </div>
-            <div className='flex flex-col w-3/4 ml-5 bg-gradient rounded-xl'>
+            <div className='flex flex-col w-3/4 ml-5 rounded-xl'>
               <Navbar user={user}/>
-              
               <Routes>
                 <Route path='/' element={ <Home /> } />
+                <Route path='/search' element={ <Search /> } />
                 <Route path='/podcast/:id' element={ <Podcast user={user}/> } />
                 <Route path='/podcastlist/:id' element={ <Playlist /> } />
-                <Route path='/profile' element={ <Profile user={user} /> } />
+                <Route path='/profile/:id' element={ <Profile user={user} /> } />
                 <Route path='/login' element={ <Login /> } />
               </Routes>
             </div>

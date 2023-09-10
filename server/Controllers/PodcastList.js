@@ -23,6 +23,16 @@ const createNewPodcastList = async(req,res,next) => {
     }
 }
 
+const getPodcastlists = async(req,res,next) => {
+    try {
+        const podcastlists = await UserPlaylist.find();
+
+        res.status(200).json(podcastlists);
+    } catch (error) {
+        next(error)
+    }
+}
+
 const getUserPodcastLists = async(req,res,next) => {
     try {
         const userId = req.params.id;
@@ -108,6 +118,7 @@ const updatePlaylist = async(req,res,next) => {
 module.exports = {
     createNewPodcastList,
     getUserPodcastLists,
+    getPodcastlists,
     getPodcastListById,
     postEpisodeToPodcastList,
     updatePlaylist,
