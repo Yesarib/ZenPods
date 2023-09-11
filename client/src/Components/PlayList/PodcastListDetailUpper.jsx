@@ -50,7 +50,7 @@ const PodcastListDetailUpper = ({ podcastlist }) => {
             <div>-</div>
             <div className='flex ml-16'>
                 <div className='mt-16'>
-                    <img src={podcastlist.imageUrl} alt={podcastlist.title} className='w-80 rounded-3xl' />
+                    <img src={podcastlist.imageUrl} alt={podcastlist.title} className='w-80 max-h-60 rounded-3xl object-cover' />
                 </div>
                 <div className='flex flex-col ml-4 mt-24'>
                     <h1 className='text-[16px] font-medium '> Podcast List </h1>

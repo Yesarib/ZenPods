@@ -12,8 +12,8 @@ const Content = ({podcasts}) => {
                 {podcasts.map((podcast) => (
                     <div key={podcast._id} className={`w-60 h-60 flex flex-col justify-start items-start ml-20 mt-10`}>
                         <Link to={`/podcast/${podcast._id}`}>
-                            <img className='w-60 max-h-36 rounded-xl' src={podcast.imageUrl} alt={podcast.title} />
-                            <div className='flex flex-col text-start'>
+                            <img className='w-60 max-h-36 rounded-xl object-cover' src={podcast.imageUrl} alt={podcast.title} />
+                            <div className='flex flex-col text-start mt-2'>
                                 <h2 className='text-[18px] font-medium'> {podcast.title} </h2>
                                 <p className='mt-1 text-[#b6b6b6]'> {podcast.description.substring(0,40)}... </p>
                             </div>
@@ -28,8 +28,8 @@ const Content = ({podcasts}) => {
                 {podcasts.map((podcast) => (
                     <div key={podcast._id} className={`w-60 h-60 flex flex-col justify-start items-start ml-20 mt-10`}>
                         <Link to={`/podcast/${podcast._id}`} >
-                            <img className='w-60 max-h-36 rounded-xl' src={podcast.imageUrl} alt={podcast.title} />
-                            <div className='flex flex-col text-start'>
+                            <img className='w-60 max-h-36 rounded-xl object-cover' src={podcast.imageUrl} alt={podcast.title} />
+                            <div className='flex flex-col text-start mt-2'>
                                 <h2 className='text-[18px] font-medium'> {podcast.title} </h2>
                                 <p className='mt-1 text-[#b6b6b6]'> {podcast.description.substring(0,40)}... </p>
                             </div>

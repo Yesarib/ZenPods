@@ -69,7 +69,7 @@ const Search = () => {
                             <img
                             src={episode.imageUrl}
                             alt={episode.title}
-                            className='max-h-28 w-full rounded-lg'
+                            className='max-h-28 w-full rounded-lg object-cover'
                             />
                             <h1 className='text-lg font-semibold mt-2'>{episode.title}</h1>
                             <p className='text-gray-400 text-sm mt-1'>{episode.publishedBy}</p>
@@ -88,7 +88,7 @@ const Search = () => {
                             <img
                             src={playlist.imageUrl}
                             alt={playlist.title}
-                            className='max-h-28 w-full rounded-lg'
+                            className='max-h-28 w-full rounded-lg object-cover'
                             />
                             <h1 className='text-lg font-semibold mt-2'>{playlist.title}</h1>
                             <p className='text-gray-400 text-sm mt-1'>{playlist.createdBy}</p>

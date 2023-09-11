@@ -51,7 +51,6 @@ const getCategoryNames = async(req,res,next) => {
 
 const getPodcastWithCategoryId = async(req,res,next) => {
     try {
-        console.log(req.params);
         const categoryId = req.params.id;
         const category = await Category.findOne({ _id: categoryId});
         if (!category) throw createError[404]('Category not found');
@@ -65,6 +64,7 @@ const getPodcastWithCategoryId = async(req,res,next) => {
 
 const getEpisodeWithCategoryId = async(req,res,next) => {
     try {
+        console.log(req.params);
         const categoryId = req.params.id;
         const category = await Category.findOne({ _id: categoryId});
         if (!category) throw createError[404]('Category not found');

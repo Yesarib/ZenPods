@@ -6,7 +6,7 @@ const PodcastDetailUpper = ({podcastDetail}) => {
         <div className='flex flex-col text-white mt-10 ml-16'>
             <div className='flex ml-16'>
                 <div className='mt-16'>
-                    <img src={podcastDetail.imageUrl} alt={podcastDetail.title} className='w-80 rounded-3xl' />
+                    <img src={podcastDetail.imageUrl} alt={podcastDetail.title} className='w-80 max-h-60 rounded-3xl object-cover' />
                 </div>
                 <div className='flex flex-col ml-4 mt-24'>
                     <h1 className='text-[16px] font-medium '> Podcast List </h1>
