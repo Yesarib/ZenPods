@@ -4,5 +4,15 @@
 
 body{
     background-color: black;
-    overflow: hidden;
+    overflow-x: hidden;
+    max-height: 100vh;
+    overflow-y: scroll;
+}
+
+::-webkit-scrollbar {
+    width: 0.5em;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: transparent;
 }

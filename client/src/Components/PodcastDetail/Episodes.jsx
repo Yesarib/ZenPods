@@ -100,7 +100,7 @@ const Episodes = ({playlist}) => {
                         >
                             <td className='w-1/12 text-start px-0'> {index} </td>
                             <td className="w-5/12 text-start px-0">
-                                <div className='flex'>
+                                <div className='flex w-96'>
                                     <div className='flex justify-start items-start'>
                                         <img
                                             src={episode.imageUrl}
@@ -110,7 +110,7 @@ const Episodes = ({playlist}) => {
                                     </div>
                                     <div className='flex flex-col justify-center ml-7'>
                                         <h1 className='text-start justify-start items-start text-[17px] font-medium'> {episode.title} </h1>
-                                        <p> {episode.description} </p>
+                                        <p> {episode.publishedBy} </p>
                                     </div>
                                 </div>
                             </td>

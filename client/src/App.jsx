@@ -11,6 +11,7 @@ import Playlist from './Pages/Playlist'
 import EpisodeCard from './Components/EpisodeCard'
 import Profile from './Pages/Profile'
 import Search from './Pages/Search'
+import Genre from './Pages/Genre'
 
 
 
@@ -41,6 +42,7 @@ const App = () => {
               <Routes>
                 <Route path='/' element={ <Home /> } />
                 <Route path='/search' element={ <Search /> } />
+                <Route path='/genre/:categoryId' element={ <Genre /> } />
                 <Route path='/podcast/:id' element={ <Podcast user={user}/> } />
                 <Route path='/podcastlist/:id' element={ <Playlist /> } />
                 <Route path='/profile/:id' element={ <Profile user={user} /> } />
@@ -50,7 +52,7 @@ const App = () => {
           </Router>
         </div>
       </div>
-      <div className='sticky bottom-0 left-0 w-full mt-10'>
+      <div className='fixed bottom-0 left-0 w-full mt-10'>
         <EpisodeCard /> 
       </div>
 
