@@ -10,6 +10,7 @@ const episodeRoutes = require('./Routes/Episode.js')
 const reviewRoutes = require('./Routes/Review.js')
 const podcastlistRoutes = require('./Routes/PodcastList.js')
 const categoryRoutes = require('./Routes/Category.js')
+const searchRoutes = require('./Routes/Search.js')
 
 dotenv.config()
 require('./Helpers/init_mongoDB.js')
@@ -28,7 +29,7 @@ app.use(cors());
 
 
 app.use('/auth', authRoutes);
-app.use('/api', podcastRoutes,episodeRoutes,reviewRoutes,podcastlistRoutes,categoryRoutes);
+app.use('/api', podcastRoutes,episodeRoutes,reviewRoutes,podcastlistRoutes,categoryRoutes, searchRoutes);
 
 
 
