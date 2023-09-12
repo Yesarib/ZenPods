@@ -5,37 +5,44 @@ const Content = ({podcasts}) => {
     
     return (
         <div className='text-white justify-center items-center text-center'>
-            <div className='text-start ml-20'>
-                <h2 className='ml-10 mt-16 text-[24px] font-medium tracking-widest'> Podcasts </h2>
-            </div>
-            <div className='flex justify-start ml-10 items-center'>
-                {podcasts.map((podcast) => (
-                    <div key={podcast._id} className={`w-60 h-60 flex flex-col justify-start items-start ml-20 mt-10`}>
-                        <Link to={`/podcast/${podcast._id}`}>
-                            <img className='w-60 max-h-36 rounded-xl object-cover' src={podcast.imageUrl} alt={podcast.title} />
-                            <div className='flex flex-col text-start mt-2'>
-                                <h2 className='text-[18px] font-medium'> {podcast.title} </h2>
-                                <p className='mt-1 text-[#b6b6b6]'> {podcast.description.substring(0,40)}... </p>
+            <h1 className='flex justify-start items-start ml-20 mt-10 text-[24px] font-semibold'> Podcasts </h1>
+            <div className='flex flex-col '>
+                <div className='flex justify-start items-center ml-10'>
+                    {podcasts.map((podcast,index) => (
+                        <Link key={index} to={`/podcast/${podcast._id}`}>
+                            <div className='m-6 flex flex-col bg-[#121212] w-72 justify-center items-center rounded-3xl hover:bg-[#1a1a1a] hover:scale-105'>
+                                <div className='w-60 flex flex-col'>
+                                    <img src={podcast.imageUrl} alt={podcast.title} className='w-52 max-h-32 mt-6 rounded-xl object-cover' />
+                                    <div className='flex flex-col mt-3 ml-1 mb-5'>
+                                        <h1 className='flex justify-start items-start text-start text-[18px] font-medium'> {podcast.title} </h1>
+                                        <h1 className='flex justify-start items-start text-start text-[15px] font-normal text-[#9b9a9a]'> {podcast.description} </h1>
+                                    </div>
+                                </div>
+                                
                             </div>
-                        </Link>
-                    </div>
-                ))}
+                        </Link>                        
+                    ))}
+                </div>                
             </div>
-            <div className='text-start ml-20'>
-                <h2 className='ml-10 mt-16 text-[24px] font-medium tracking-widest'> Newest Podcasts </h2>
-            </div>
-            <div className='flex justify-start ml-10 items-center'>
-                {podcasts.map((podcast) => (
-                    <div key={podcast._id} className={`w-60 h-60 flex flex-col justify-start items-start ml-20 mt-10`}>
-                        <Link to={`/podcast/${podcast._id}`} >
-                            <img className='w-60 max-h-36 rounded-xl object-cover' src={podcast.imageUrl} alt={podcast.title} />
-                            <div className='flex flex-col text-start mt-2'>
-                                <h2 className='text-[18px] font-medium'> {podcast.title} </h2>
-                                <p className='mt-1 text-[#b6b6b6]'> {podcast.description.substring(0,40)}... </p>
+
+            <div className='flex flex-col mt-10'>
+                <h1 className='flex justify-start items-start ml-20 text-[24px] font-semibold'> Newest Podcasts </h1>
+                <div className='flex justify-start items-center ml-10'>
+                    {podcasts.map((podcast,index) => (
+                        <Link key={index} to={`/podcast/${podcast._id}`}>
+                            <div className='m-6 flex flex-col bg-[#121212] w-72 justify-center items-center rounded-3xl hover:bg-[#1a1a1a] hover:scale-105'>
+                                <div className='w-60 flex flex-col'>
+                                    <img src={podcast.imageUrl} alt={podcast.title} className='w-52 max-h-32 mt-6 rounded-xl object-cover' />
+                                    <div className='flex flex-col mt-3 ml-1 mb-5'>
+                                        <h1 className='flex justify-start items-start text-start text-[18px] font-medium'> {podcast.title} </h1>
+                                        <h1 className='flex justify-start items-start text-start text-[15px] font-normal text-[#9b9a9a]'> {podcast.description} </h1>
+                                    </div>
+                                </div>
+                                
                             </div>
-                        </Link>
-                    </div>
-                ))}
+                        </Link>                        
+                    ))}
+                </div>                
             </div>
         </div>
     );

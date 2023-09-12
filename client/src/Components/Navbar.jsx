@@ -23,11 +23,14 @@ const Navbar = ({ user }) => {
             </div>
             <div className="flex justify-evenly mr-20">
             {user && (
-                    <div className="relative group">
+                    <div className="relative group flex">
+                        <div>
+                            <a href="/#"> Upload </a>
+                        </div>
                         <button
                             id="menuButton"
                             onClick={toggleMenu}
-                            className="text-white text-[17px] group-hover:text-gray-600"
+                            className="text-white text-[17px] hover:text-gray-600 ml-10"
                         >
                             {user.firstName}
                         </button>
@@ -46,7 +49,7 @@ const Navbar = ({ user }) => {
                 {!user && (
                     <>
                         <button className="text-gray-300 text-[18px] font-medium">
-                            Sign up
+                            <a href="/register"> Sign Up</a>
                         </button>
                         <button className="ml-5 text-black text-[18px] font-medium bg-white tracking-wide w-32 h-9 rounded-3xl">
                             <a href="/login">Log in </a>

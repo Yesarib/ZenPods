@@ -109,8 +109,8 @@ const Episodes = ({playlist}) => {
                                         />
                                     </div>
                                     <div className='flex flex-col justify-center ml-7'>
-                                        <h1 className='text-start justify-start items-start text-[17px] font-medium'> {episode.title} </h1>
-                                        <p> {episode.publishedBy} </p>
+                                        <h1 className='text-start justify-start items-start text-[16px] font-medium'> {episode.title} </h1>
+                                        <p className='text-[15px] font-normal text-[#727272]'> {episode.publishedBy} </p>
                                     </div>
                                 </div>
                             </td>
@@ -130,8 +130,7 @@ const Episodes = ({playlist}) => {
                                             <div className={`absolute ${isMenuOpen === episode._id ? 'block' : 'hidden'} ml-10 w-36`} style={{ bottom: '100%' }}>
                                                 <button
                                                     className='bg-gray-800 w-36 rounded-xl text-[17px]'
-                                                    onMouseEnter={() => togglePlaylistMenu(episode._id)} // Üzerine geldiğinizde playlist menüsünü açın
-                                                    //onMouseLeave={() => togglePlaylistMenu(null)} // Üzerinden çıktığınızda playlist menüsünü kapatın
+                                                    onMouseEnter={() => togglePlaylistMenu(episode._id)} 
                                                 >
                                                     Add To Playlist
                                                 </button>

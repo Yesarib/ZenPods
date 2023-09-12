@@ -13,7 +13,7 @@ const Sidebar = ({ user }) => {
 
     return (
         <div className='w-11/12 text-white font-sans mt-5 ml-7 flex flex-col justify-center items-center'>
-            <div className='w-full h-36 bg-[#000511] rounded-3xl'>
+            <div className='w-full h-36 rounded-3xl'>
                 <div className='flex '>
                     <img src="/home.png" alt="home" className='w-8 mt-4 ml-5'/>
                     <a href="/" className='mt-5 ml-5 text-[18px] font-medium'> Home </a>
@@ -24,7 +24,7 @@ const Sidebar = ({ user }) => {
                 </div>
             </div>
 
-            <div className='w-full bg-[#000511] rounded-3xl mt-7 '>
+            <div className='w-full rounded-3xl mt-7 '>
                 <div className='w-full flex justify-between'>
                     <div className='flex'>
                         <img src="/books.png" alt="books" className='w-8 ml-4 mt-3' />
