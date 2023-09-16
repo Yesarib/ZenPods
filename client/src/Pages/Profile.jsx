@@ -1,15 +1,42 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable react/prop-types */
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState,useRef } from 'react'
 import podcastListService from '../Services/PodcastList';
+import userService from '../Services/User';
 import { Link } from 'react-router-dom';
 
 const Profile = ({user}) => {
     if (user === null) {
         return <div>Loading...</div>; 
     }
-    console.log(user);
+    const [isEditing, setIsEditing] = useState(false);
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [newProfileImage, setNewProfileImage] = useState(null);
     const [userPlaylist, setUserPlaylist] = useState([]);
+
+    const popUpRef = useRef(null);
+
+    const handleEditClick = () => {
+        setIsEditing(true);
+    };
+    const closePopUp = () => {
+        setIsEditing(false);
+    };
+
+    const handleImageChange = (event) => {
+        const selectedImage = event.target.files[0];
+        setNewProfileImage(selectedImage);
+    };
+
+    const updateUser = async() => {
+        const response = await userService.updateUser(user._id, newProfileImage, firstName, lastName);
+        if (response){
+            console.log("Playlist successfuly uptaded");
+            setIsEditing(false)
+            window.location.reload();
+        }
+    }
 
     const getUserPlaylist = async()=> {
         try {
@@ -26,18 +53,64 @@ const Profile = ({user}) => {
         getUserPlaylist();
     },[])
 
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (popUpRef.current && !popUpRef.current.contains(event.target)) {
+                closePopUp();
+            }
+        };
+
+        if (isEditing) {
+            document.addEventListener('mousedown', handleClickOutside);
+        } else {
+            document.removeEventListener('mousedown', handleClickOutside);
+        }
+
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [isEditing]);
+
     return (
         <div className='text-white flex flex-col w-full'>
             <div className='flex ml-10'>
-                <div className='ml-12 mt-10'>
+                <div onClick={handleEditClick} className='ml-12 mt-10 cursor-pointer'>
                     <img src={user?.profileImage} alt={user.firstName} className='w-48 rounded-full'/>
                 </div>
                 <div className='flex flex-col mt-16 ml-7'>
                     <h1 className='ml-1.5'>Profile</h1>
-                    <h1 className='text-[72px] font-medium'> {user.firstName} {user.lastName} </h1>
+                    <h1 onClick={handleEditClick} className='text-[72px] font-medium cursor-pointer'> {user.firstName} {user.lastName} </h1>
                     <a href="#" className='ml-1.5'> {user.subs.length} Subscription </a>
                 </div>
             </div>
+
+            {isEditing && (
+                <div className='fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50'>
+                    <div className='bg-[#292929] p-4 rounded-lg shadow-md' ref={popUpRef}>
+                            <div className='flex justify-between mb-5'>
+                                <h2 className='text-[24px] font-semibold mb-2 tracking-wider'> Profile details </h2>
+                                <button className='mr-2 text-[20px]' onClick={closePopUp} > X </button>
+                            </div>
+                            <div className='flex'>
+                                <div>
+                                    <img className='w-52 rounded-full' src={user.profileImage} alt={user.firstName} />
+                                    <input type="file" accept="image/*" onChange={handleImageChange} />
+
+                                </div>
+                                <div className='flex flex-col ml-4 justify-center items-center'>
+                                    <input onChange={(e) => setFirstName(e.target.value)} type='text' placeholder={user.firstName} className='w-72 p-1 mb-2 border-transparent rounded bg-[#727272]' />
+                                    <input onChange={(e) => setLastName(e.target.value)} type='text' placeholder={user.lastName} className='w-72 p-1 mb-2 border-transparent rounded bg-[#727272]' />
+                                    <div className='w-full flex justify-end items-center mt-2'>
+                                        <button onClick={updateUser} className='bg-white text-black p-2 rounded-3xl hover:scale-105 font-semibold w-28 items-center '>
+                                            Save
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                    </div>
+                </div>
+            )}
 
             <div className='flex flex-col w-full mt-32 ml-10'>
                 <div>
@@ -76,6 +149,7 @@ const Profile = ({user}) => {
                     ))}
                 </div>
             </div>
+            
         </div>
     )
 }

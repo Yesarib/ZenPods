@@ -13,22 +13,25 @@ const episodeSchema = new mongoose.Schema({
     devices: { type: [String] },
 });
 
-episodeSchema.index({
-    title: 'text',
-    description: 'text',
-    publishedBy: 'text',
-    category: 'text',
-}, {
-    name: 'TextIndex',
-    default_language: 'turkish',
-    weights: {
-        title: 3,
-        description: 2,
-        publishedBy: 1,
-        category: 1,
+episodeSchema.index(
+    {
+        title: 'text',
+        description: 'text',
+        publishedBy: 'text',
+        category: 'text',
     },
-    min: 1 // Minimum kelime uzunluğu
-});
+    {
+        name: 'TextIndex',
+        weights: {
+            title: 3,
+            description: 2,
+            publishedBy: 1,
+            category: 1,
+        },
+        default_language: 'turkish',
+        min: 1, // Minimum kelime uzunluğu
+    }
+);
 
 const Episode = mongoose.model('Episode', episodeSchema);
 

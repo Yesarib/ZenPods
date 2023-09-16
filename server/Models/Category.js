@@ -12,6 +12,11 @@ const categorySchema = new mongoose.Schema({
     }
 });
 
+categorySchema.index({
+    name:'text',
+    color:'text'
+})
+
 const Category = mongoose.model('Category', categorySchema);
 
 module.exports = Category;

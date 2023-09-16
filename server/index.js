@@ -5,6 +5,7 @@ const createError = require("http-errors");
 const morgan = require('morgan');
 const cors = require('cors');
 const authRoutes = require('./Routes/Auth.js')
+const userRoute = require('./Routes/User.js')
 const podcastRoutes = require('./Routes/Podcast.js')
 const episodeRoutes = require('./Routes/Episode.js')
 const reviewRoutes = require('./Routes/Review.js')
@@ -28,7 +29,7 @@ app.use(cors());
 
 
 
-app.use('/auth', authRoutes);
+app.use('/auth', authRoutes, userRoute );
 app.use('/api', podcastRoutes,episodeRoutes,reviewRoutes,podcastlistRoutes,categoryRoutes, searchRoutes);
 
 

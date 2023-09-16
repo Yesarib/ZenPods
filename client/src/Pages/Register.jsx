@@ -4,20 +4,18 @@ import { useNavigate } from 'react-router-dom'
 
 
 const Register = () => {
-    const [form, setForm] = useState({
-        firstName:"",
-        lastName:"",
-        email:"",
-        password:"",
-    })
+    const [firstName, setFirstName] = useState("")
+    const [lastName, setLastName] = useState("")
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
     const navigate = useNavigate();
 
 
     const handleSubmit = async(e) => {
         e.preventDefault();
         try {
-            await authService.signUp(form.firstName, form.lastName, form.email, form.password).then(() => {
-                navigate("/login");
+            await authService.signUp(firstName, lastName, email, password).then(() => {
+                navigate("");
             })
         } catch (error) {
             console.log(error);
@@ -28,9 +26,9 @@ const Register = () => {
         <div className='w-full mt-20 justify-center items-center text-center text-white'>
             <form onSubmit={handleSubmit}>
                 <h2 className='text-[36px] font-semibold tracking-widest'> PodConnect </h2>
-                <h2 className='text-[28px] mt-10 font-semibold tracking-widest'> Login </h2>
+                <h2 className='text-[28px] mt-10 font-semibold tracking-widest'> Sign Up </h2>
                 <div className='mt-10'>
-                    <p className='text-[17px]'> Login with </p>
+                    <p className='text-[17px]'> Sign Up with </p>
                     <div className='flex flex-col justify-center items-center mt-5'>
                         <div className='border-2 rounded-3xl w-96 h-10 flex items-center justify-center mt-5'> With Google </div>
                         <div className='border-2 rounded-3xl w-96 h-10 flex items-center justify-center mt-5'> With Facebook </div>
@@ -50,7 +48,7 @@ const Register = () => {
                             placeholder='First Name'
                             onInput={(e) => {
                                 e.preventDefault()
-                                setForm({firstName:e.target.value})
+                                setFirstName(e.target.value)
                             }}
                             className='w-full bg-transparent mt-2 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-opacity-50'
                         />
@@ -64,7 +62,7 @@ const Register = () => {
                             placeholder='Last Name'
                             onInput={(e) => {
                                 e.preventDefault()
-                                setForm({firstName:e.target.value})
+                                setLastName(e.target.value)
                             }}
                             className='w-full bg-transparent mt-2 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-opacity-50'
                         />
@@ -79,7 +77,7 @@ const Register = () => {
                             autoComplete='off'
                             onInput={(e) => {
                                 e.preventDefault()
-                                setForm({firstName:e.target.value})
+                                setEmail(e.target.value)
                             }}
                             className='w-full bg-transparent mt-2 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-opacity-50'
                         />
@@ -93,25 +91,19 @@ const Register = () => {
                             placeholder='Password'
                             onInput={(e) => {
                                 e.preventDefault()
-                                setForm({firstName:e.target.value})
+                                setPassword(e.target.value)
                             }}
                             className='w-full bg-transparent mt-2 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-opacity-50'
                         />
                     </div>
-                    <div className='flex w-96 mt-5'>
-                        <label className='text-left'> Remember me</label>
-                    </div>
                     <div className='w-96 flex mt-5 justify-center'>
-                        <button className='w-full bg-cyan-600 h-12 rounded-3xl text-[18px] font-semibold tracking-widest transform hover:bg-cyan-800 transition duration-500'> Log in </button>
-                    </div>
-                    <div className='mt-5 underline'>
-                        <a href="#" className='font-medium'> Forget Password?</a>
+                        <button className='w-full bg-cyan-600 h-12 rounded-3xl text-[18px] font-semibold tracking-widest transform hover:bg-cyan-800 transition duration-500'> Sign Up </button>
                     </div>
                     <div className='flex items-center mt-10 justify-center'>
                         <div className='w-1/2 border-t border-gray-600'></div>
                     </div>
-                    <div>
-                        <label> Don't have an account? <a href="/register" className='underline font-medium'> Sign up now!</a> </label>
+                    <div className='mb-5'>
+                        <label> Do you have an account? <a href="/login" className='underline font-medium'> Log in now!</a> </label>
                     </div>
                 </div>
             </form>

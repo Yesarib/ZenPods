@@ -24,16 +24,14 @@ const Navbar = ({ user }) => {
             <div className="flex justify-evenly mr-20">
             {user && (
                     <div className="relative group flex">
-                        <div>
+                        <div className="mt-2">
                             <a href="/#"> Upload </a>
                         </div>
-                        <button
-                            id="menuButton"
-                            onClick={toggleMenu}
-                            className="text-white text-[17px] hover:text-gray-600 ml-10"
-                        >
-                            {user.firstName}
-                        </button>
+                    
+                        <div onClick={toggleMenu} className="ml-5">
+                            <img src={user.profileImage} alt={user.firstName} className="w-10 rounded-full"/>
+                        </div>
+                        
                         <div
                             className={`absolute ${isMenuOpen ? 'block' : 'hidden'} mt-2 py-2 bg-white border border-gray-200 shadow-lg rounded-lg`}
                         >

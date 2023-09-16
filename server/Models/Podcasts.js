@@ -38,24 +38,25 @@ const PodcastSchema = new Schema({
     }
 })
 
-PodcastSchema.index({
-    title: 'text',
-    description: 'text',
-    uploadedBy: 'text',
-    category: 'text',
-}, {
-    name: 'TextIndex',
-    weights: {
-        title: 3,
-        description: 2,
-        uploadedBy: 1,
-        category: 1,
+PodcastSchema.index(
+    {
+        title: 'text',
+        description: 'text',
+        uploadedBy: 'text',
+        category: 'text',
     },
-    collation: {
-        locale: 'en', // Locale ayarını gerektiği gibi değiştirin
-        strength: 2, // Minimum kelime uzunluğu
-    },
-});
+    {
+        name: 'TextIndex',
+        weights: {
+            title: 3,
+            description: 2,
+            uploadedBy: 1,
+            category: 1,
+        },
+        default_language: 'turkish',
+        min: 1, // Minimum kelime uzunluğu
+    }
+);
 
 const Podcast = mongoose.model('Podcast', PodcastSchema)
 
