@@ -29,7 +29,7 @@ const Navbar = ({ user }) => {
                         </div>
                     
                         <div onClick={toggleMenu} className="ml-5">
-                            <img src={user.profileImage} alt={user.firstName} className="w-10 rounded-full"/>
+                            <img src={`http://localhost:8000/assets/${user.profileImage}`} alt={user.firstName} className="w-10 rounded-full"/>
                         </div>
                         
                         <div

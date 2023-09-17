@@ -16,22 +16,22 @@ const getUserById = async(userId) => {
     }
 }
 
-const updateUser = async(userId,profileImage, firstName,lastName) => {
+const updateUser = async (userId, formData) => {
     try {
-        return await axios.put(BASE_URL + "/auth/updateUser" + userId, {
-            profileImage,
-            firstName,
-            lastName,
-        }).then((res) => {
-            if (res){
-                return res.data
-            }
-        })
+        const response = await axios.put(BASE_URL + "/updateUser/" + userId, formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data', 
+            },
+        });
+
+        if (response) {
+            return response.data;
+        }
     } catch (error) {
         console.log(error);
+        throw error; 
     }
-}
-
+};
 
 const userService = {
     getUserById,
