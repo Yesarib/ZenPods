@@ -3,17 +3,19 @@
 import React, { useEffect, useState, useRef } from 'react'
 import podcastListService from '../Services/PodcastList';
 import userService from '../Services/User';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
-const Profile = ({ user }) => {
-    if (user === null) {
-        return <div>Loading...</div>;
-    }
+const Profile = ({ currentUser }) => {
     const [isEditing, setIsEditing] = useState(false);
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [newProfileImage, setNewProfileImage] = useState(null);
     const [userPlaylist, setUserPlaylist] = useState([]);
+    const [user,setUser] = useState([]);
+
+    console.log(currentUser);
+
+    const userId = useParams();
 
     const popUpRef = useRef(null);
 
@@ -36,7 +38,6 @@ const Profile = ({ user }) => {
 
     const updateUser = async () => {
         const formData = new FormData();
-        formData.append('userId', user._id)
         formData.append('firstName', firstName)
         formData.append('lastName', lastName)
         if (newProfileImage) {
@@ -52,7 +53,7 @@ const Profile = ({ user }) => {
 
     const getUserPlaylist = async () => {
         try {
-            const response = await podcastListService.getUserPodcastList(user._id);
+            const response = await podcastListService.getUserPodcastList(userId.id);
             if (response) {
                 setUserPlaylist(response)
             }
@@ -61,9 +62,22 @@ const Profile = ({ user }) => {
         }
     }
 
+    const getUserById = async() => {
+        try {
+            const response = await userService.getUserById(userId.id);
+            if (response) {
+                setUser(response)
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     useEffect(() => {
+        getUserById();
+
         getUserPlaylist();
-    }, [])
+    }, [userId])
 
     useEffect(() => {
         const handleClickOutside = (event) => {
@@ -83,7 +97,6 @@ const Profile = ({ user }) => {
         };
     }, [isEditing]);
 
-    console.log(user);
 
     return (
         <div className="text-white flex flex-col w-full">
@@ -106,12 +119,12 @@ const Profile = ({ user }) => {
                     </h1>
                     <a href="#" className="ml-1.5">
 
-                        {user.subs.length} Subscription
+                        {user?.subs?.length} Subscription
                     </a>
                 </div>
             </div>
 
-            {isEditing && (
+            {currentUser?._id === userId.id && isEditing && (
                 <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
                     <div
                         className="bg-[#292929] p-4 rounded-lg shadow-md"
@@ -212,7 +225,7 @@ const Profile = ({ user }) => {
                     <h1 className="text-[28px] font-medium ml-10"> Subscriptions </h1>
                 </div>
                 <div className="flex mt-10">
-                    {user.subs.map((sub, index) => (
+                    {user?.subs?.map((sub, index) => (
                         <div key={index} className="flex flex-col">
                             <div className="flex flex-col">
                                 <div>

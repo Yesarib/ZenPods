@@ -4,7 +4,7 @@ const createError = require('http-errors')
 
 const getUserById = async(req,res,next) => {
     try {
-        const { userId } = req.body;
+        const { userId } = req.params;
 
         const user = await User.findById(userId);
         if(!user) throw createError[404]('No user');
@@ -15,13 +15,33 @@ const getUserById = async(req,res,next) => {
     }
 }
 
+const subscription = async(req,res,next) => {
+    try {
+        const { subscriptionToUserId } = req.params
+        const { userId } = req.body;
 
+        const subscriptionToUser = await User.findById(subscriptionToUserId);
+        if(!subscriptionToUser) throw createError.NotFound('User not found');
+
+        const user = await User.findById(userId);
+
+        if (user.subs.includes(subscriptionToUserId)) {
+            return res.status(400).json({ message: 'Already sub' });
+        }
+
+        user.subs.push(subscriptionToUserId);
+        
+        res.status(201).json(user);
+    } catch (error) {
+        next(error)
+    }
+}
 
 const updateUser = async (req, res, next) => {
     try {
         const { userId } = req.params;
         const { firstName, lastName } = req.body;
-        console.log(req.file);
+
         const user = await User.findById(userId);
         if (!user) throw createError(404, 'No user');
     
@@ -30,15 +50,11 @@ const updateUser = async (req, res, next) => {
             user.profileImage = profileImageBuffer;
         }
         if (firstName !== undefined && firstName !== null && firstName !== "") {
-            playlist.firstName = firstName;
+            user.firstName = firstName;
         }
         if (lastName !== lastName && lastName !== null && lastName !== "") {
-            playlist.imageUrl = imageUrl;
+            user.lastName = lastName;
         }
-
-
-    
-    
         await user.save();
     
         res.status(200).json({ message: "User updated successfully", user });
@@ -51,4 +67,5 @@ const updateUser = async (req, res, next) => {
 module.exports = {
     getUserById,
     updateUser,
+    subscription
 }

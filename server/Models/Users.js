@@ -56,5 +56,23 @@ UserSchema.methods.isValidPassword = async function(password) {
     }
 }
 
+UserSchema.index(
+    {
+        firstName: 'text',
+        lastName: 'text',
+    },
+    {
+        name: 'TextIndex',
+        weights: {
+            title: 3,
+            description: 2,
+            uploadedBy: 1,
+            category: 1,
+        },
+        default_language: 'turkish',
+        min: 1,
+    }
+);
+
 const User = mongoose.model('User',UserSchema)
 module.exports = User

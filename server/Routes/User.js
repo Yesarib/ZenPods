@@ -1,12 +1,13 @@
 const express = require('express')
-const { getUserById } = require('../Controllers/User.js')
+const { getUserById, subscription } = require('../Controllers/User.js')
 
 
 
 const router = express.Router();
 
 
-router.get('/getUserById', getUserById)
+router.get('/getUserById/:userId', getUserById)
+router.post('/subscription/:subscriptionToUserId', subscription)
 
 
 module.exports = router

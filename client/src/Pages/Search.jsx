@@ -9,6 +9,7 @@ const Search = () => {
     const [episodes, setEpisodes] = useState([]);
     const [podcasts, setPodcasts] = useState([]);
     const [categories, setCategories] = useState([]);
+    const [user, setUser] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
 
     const handleSearch = async () => {
@@ -18,6 +19,7 @@ const Search = () => {
             if (response) {
                 setPodcasts(response.podcasts);
                 setEpisodes(response.episodes);
+                setUser(response.user)
                 setCategories([]);
                 window.scrollTo(0, 0); // Sayfanın başına gitmek için
             }
@@ -37,18 +39,7 @@ const Search = () => {
         }
     };
 
-    const getEpidoesAndPlaylists = async () => {
-        try {
-            const responseEpisode = await episodesService.getEpisodes();
-            const responsePodcasts = await podcastService.getPodcasts();
-            if (responseEpisode || responsePodcasts) {
-                setEpisodes(responseEpisode);
-                setPodcasts(responsePodcasts);
-            }
-        } catch (error) {
-            console.log(error);
-        }
-    };
+
 
     useEffect(() => {
         if (searchTerm === '') {
@@ -141,6 +132,29 @@ const Search = () => {
                                             />
                                             <h1 className='text-lg font-semibold mt-2'>{podcast.title}</h1>
                                             <p className='text-gray-400 text-sm mt-1'>{podcast.uploadedBy}</p>
+                                        </div>
+                                    </div>
+                                </Link>
+                            ))}
+                        </div>
+                    </>
+                )}
+
+
+                {user && user.length > 0 && (
+                    <>
+                        <h1 className='text-[28px] font-medium mt-16'> Users </h1>
+                        <div className='flex flex-wrap'>
+                            {user.map((user, index) => (
+                                <Link key={index} to={`/profile/${user._id}`}>
+                                    <div className='w-60 m-2'>
+                                        <div className='rounded-xl shadow-md p-4 hover:shadow-lg transition duration-300'>
+                                            <img
+                                                src={`http://localhost:8000/assets/${user.profileImage}`}
+                                                alt={user.firstName}
+                                                className='max-h-28 w-full rounded-lg object-cover'
+                                            />
+                                            <h1 className='text-lg font-semibold mt-2'>{user.firstName} {user.lastName}</h1>
                                         </div>
                                     </div>
                                 </Link>

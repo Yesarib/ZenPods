@@ -47,7 +47,7 @@ const App = () => {
                 <Route path='/genre/:categoryId' element={<Genre />} />
                 <Route path='/podcast/:id' element={<Podcast user={user} />} />
                 <Route path='/podcastlist/:id' element={<Playlist />} />
-                <Route path='/profile/:id' element={<Profile user={user} />} />
+                <Route path='/profile/:id' element={<Profile currentUser={user} />} />
                 <Route path='/login' element={<Login />} />
                 <Route path='/register' element={<Register />} />
               </Routes>
