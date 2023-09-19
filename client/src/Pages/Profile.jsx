@@ -189,9 +189,9 @@ const Profile = ({ user }) => {
                             >
                                 <div>
                                     <img
-                                        src={playlist.imageUrl}
+                                        src={`http://localhost:8000/assets/${playlist.imageUrl}`}
                                         alt={playlist.title}
-                                        className="w-48 rounded-xl"
+                                        className="w-48 rounded-xl max-h-[110px]"
                                     />
                                 </div>
                                 <div className="flex flex-col mt-2">

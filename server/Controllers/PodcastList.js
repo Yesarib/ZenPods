@@ -87,22 +87,25 @@ const postEpisodeToPodcastList = async (req, res, next) => {
 
 const updatePlaylist = async(req,res,next) => {
     try {
-        const playlistId = req.params.id;
-        const { title,description, imageUrl } = req.body;
-
-        const playlist = await UserPlaylist.findById(playlistId);
+        console.log(req.body);
+        const { id } = req.params;
+        const { title,description } = req.body;
+        const playlist = await UserPlaylist.findById(id);
 
         if (!playlist) throw createError[404]("There is no playlist");
 
+
+        if (req.file) {
+            const newImage = req.file.filename;
+            playlist.imageUrl = newImage;
+        }
         if (title !== undefined && title !== null && title !== "") {
             playlist.title = title;
         }
         if (description !== undefined && description !== null) {
             playlist.description = description;
         }
-        if (imageUrl !== undefined && imageUrl !== null && imageUrl !== "") {
-            playlist.imageUrl = imageUrl;
-        }
+        
 
         await playlist.save();
 

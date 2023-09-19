@@ -8,7 +8,6 @@ router.get('/getUserPodcastList/:id',getUserPodcastLists);
 router.get('/getPodcastlists',getPodcastlists);
 router.get('/getPodcastListById/:id',getPodcastListById);
 router.post('/postEpisodeToPodcastList', postEpisodeToPodcastList);
-router.put('/updatePodcastList/:id',updatePlaylist);
 
 
 module.exports = router

@@ -7,7 +7,7 @@ const PodcastListDetailUpper = ({ podcastlist }) => {
     const [isEditing, setIsEditing] = useState(false);
     const [title, setTitle] = useState("")
     const [description, setDescription] = useState("")
-    const [imageUrl, setImageUrl] = useState("")
+    const [newImage, setNewImage] = useState(null);
 
     const popUpRef = useRef(null);
 
@@ -18,8 +18,24 @@ const PodcastListDetailUpper = ({ podcastlist }) => {
         setIsEditing(false);
     };
 
+    const handleImageChange = (event) => {
+        const selectedImage = event.target.files[0];
+        setNewImage(selectedImage);
+        const overlayIcon = document.querySelector(".overlay-icon");
+        if (overlayIcon) {
+            overlayIcon.style.display = "none";
+        }
+    };
+
     const updatePodcastlist = async() => {
-        const response = await podcastListService.updatePodcastlist(podcastlist._id , title, description, imageUrl, podcastlist);
+        const formData = new FormData();
+        formData.append('id', podcastlist._id)
+        formData.append('title', title)
+        formData.append('description', description)
+        if (newImage) {
+            formData.append('imageUrl', newImage);
+        }
+        const response = await podcastListService.updatePodcastlist(podcastlist._id , formData);
         if (response){
             console.log("Playlist successfuly uptaded");
             setIsEditing(false)
@@ -50,7 +66,7 @@ const PodcastListDetailUpper = ({ podcastlist }) => {
             <div>-</div>
             <div className='flex ml-16'>
                 <div className='mt-16'>
-                    <img src={podcastlist.imageUrl} alt={podcastlist.title} className='w-80 max-h-60 rounded-3xl object-cover' />
+                    <img src={`http://localhost:8000/assets/${podcastlist.imageUrl}`} alt={podcastlist.title} className='w-80 max-h-60 rounded-3xl object-cover' />
                 </div>
                 <div className='flex flex-col ml-4 mt-24'>
                     <h1 className='text-[16px] font-medium '> Podcast List </h1>
@@ -80,9 +96,23 @@ const PodcastListDetailUpper = ({ podcastlist }) => {
                                 <button className='mr-2 text-[20px]' onClick={closePopUp} > X </button>
                             </div>
                             <div className='flex'>
-                                <div>
-                                    <img className='w-80 rounded-xl' src={podcastlist.imageUrl} alt={podcastlist.title} />
-                                </div>
+                                <label htmlFor="profileImageInput" className="cursor-pointer">
+                                    <img
+                                        className="w-52 rounded-full"
+                                        src={newImage ? URL.createObjectURL(newImage) : `http://localhost:8000/assets/${podcastlist.imageUrl}`}
+                                        alt={podcastlist.title}
+                                    />
+                                    <div className="overlay-icon">
+                                        <span className="material-icons">edit</span>
+                                    </div>
+                                </label>
+                                <input
+                                    id="profileImageInput"
+                                    type="file"
+                                    accept="image/*"
+                                    onChange={handleImageChange}
+                                    style={{ display: "none" }}
+                                />
                                 <div className='flex flex-col ml-2'>
                                     <input onChange={(e) => setTitle(e.target.value)} type='text' placeholder={podcastlist.title} className='w-72 p-1 mb-2 border-transparent rounded bg-[#727272]' />
                                     <textarea onChange={(e) => setDescription(e.target.value)} name="desc" id="desc" cols="20" rows="5" className='w-full p-1 mt-2 border-transparent rounded bg-[#727272] pl-white' placeholder='Add an optional description'></textarea>

@@ -6,7 +6,6 @@ const morgan = require('morgan');
 const cors = require('cors');
 const multer = require('multer')
 const path = require('path');
-const { fileURLToPath } = require('url');
 const authRoutes = require('./Routes/Auth.js')
 const userRoute = require('./Routes/User.js')
 const podcastRoutes = require('./Routes/Podcast.js')
@@ -16,6 +15,7 @@ const podcastlistRoutes = require('./Routes/PodcastList.js')
 const categoryRoutes = require('./Routes/Category.js')
 const searchRoutes = require('./Routes/Search.js');
 const { updateUser } = require('./Controllers/User.js');
+const { updatePlaylist } = require('./Controllers/PodcastList.js');
 
 dotenv.config()
 require('./Helpers/init_mongoDB.js')
@@ -44,6 +44,7 @@ const upload = multer({ storage });
 
 app.use('/auth', authRoutes, userRoute);
 app.put('/updateUser/:userId', upload.single('profileImage'), updateUser)
+app.put('/updatePodcastList/:id', upload.single('imageUrl'), updatePlaylist)
 app.use('/api', podcastRoutes, episodeRoutes, reviewRoutes, podcastlistRoutes, categoryRoutes, searchRoutes);
 
 app.use(async (req, res, next) => {

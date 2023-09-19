@@ -67,19 +67,17 @@ const addEpisodeToPodcastList = async(playlistId, episodeId) => {
     }
 }
 
-const updatePodcastlist = async(playlistId, title, description, imageUrl, podcastlist) => {
+const updatePodcastlist = async(playlistId, formData) => {
     try {
-        const updatedImageUrl = imageUrl || podcastlist.imageUrl;
-
-        return await axios.put(BASE_URL + "/api/updatePodcastList/" + playlistId, {
-            title:title,
-            description:description,
-            imageUrl:updatedImageUrl,
-        }).then((res) => {
-            if (res) {
-                return res.data
+        console.log(formData);
+        const response =  await axios.put(BASE_URL + "/updatePodcastList/" + playlistId, formData, {
+            headers:{
+                'Content-Type': 'multipart/form-data', 
             }
-        })
+        });
+        if (response){
+            return response.data
+        }
     } catch (error) {
         console.log(error);
     }
