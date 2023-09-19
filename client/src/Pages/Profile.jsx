@@ -12,9 +12,7 @@ const Profile = ({ currentUser }) => {
     const [newProfileImage, setNewProfileImage] = useState(null);
     const [userPlaylist, setUserPlaylist] = useState([]);
     const [user,setUser] = useState([]);
-
-    console.log(currentUser);
-
+    
     const userId = useParams();
 
     const popUpRef = useRef(null);
@@ -73,6 +71,18 @@ const Profile = ({ currentUser }) => {
         }
     }
 
+    const subscribe = async() => {
+        try {
+            const response = await userService.subscription(userId.id, currentUser._id);
+            if(response) {
+                console.log("Successfuly subscribed");
+                window.location.reload();
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     useEffect(() => {
         getUserById();
 
@@ -117,10 +127,22 @@ const Profile = ({ currentUser }) => {
 
                         {user.firstName} {user.lastName}
                     </h1>
-                    <a href="#" className="ml-1.5">
-
-                        {user?.subs?.length} Subscription
-                    </a>
+                    <div className='mt-4'>
+                        <a href="#" className="ml-1.5 text-[15px]">
+                            {user?.subs?.length} Subscription
+                        </a>
+                        {currentUser?._id !== userId.id && (
+                            <div>
+                                {!currentUser?.subs?.includes(userId.id) && (
+                                    <button onClick={subscribe} className='ml-10 text-[15px] w-36 text-center items-center bg-sky-800 rounded-2xl'> Subscribe </button>
+                                )}
+                                {currentUser?.subs?.includes(userId.id) && (
+                                    <button className='ml-10 text-[15px] w-36 text-center items-center bg-sky-800 rounded-2xl'> Subscribed </button>
+                                )}
+                            </div>
+                        )}
+                    </div>
+                    
                 </div>
             </div>
 

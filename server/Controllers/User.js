@@ -19,7 +19,6 @@ const subscription = async(req,res,next) => {
     try {
         const { subscriptionToUserId } = req.params
         const { userId } = req.body;
-
         const subscriptionToUser = await User.findById(subscriptionToUserId);
         if(!subscriptionToUser) throw createError.NotFound('User not found');
 
@@ -30,6 +29,7 @@ const subscription = async(req,res,next) => {
         }
 
         user.subs.push(subscriptionToUserId);
+        user.save();
         
         res.status(201).json(user);
     } catch (error) {

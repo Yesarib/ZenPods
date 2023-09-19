@@ -28,7 +28,7 @@ const UserSchema = new Schema({
     }],
     subs: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Podcast'
+        ref: 'User'
     }],
     profileImage: {
         type:String,

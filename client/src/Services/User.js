@@ -16,7 +16,7 @@ const getUserById = async(userId) => {
 
 const subscription = async(subscriptionUserId, userId) => {
     try {
-        return await axios.post(BASE_URL + "/api/subscription/" + subscriptionUserId, {
+        return await axios.post(BASE_URL + "/auth/subscription/" + subscriptionUserId, {
             userId
         }).then((res)=> {
             if(res){
