@@ -1,6 +1,8 @@
 const UserPlaylist = require('../Models/UserPlaylist.js');
 const Episode = require('../Models/Episode.js');
+const User = require('../Models/Users.js')
 const createError = require('http-errors');
+
 
 
 const createNewPodcastList = async(req,res,next) => {
@@ -8,7 +10,6 @@ const createNewPodcastList = async(req,res,next) => {
         const { title, imageUrl } = req.body; 
         const userId = req.params.id;
     
-        
         const newPlaylist = new UserPlaylist({
             title: title, 
             imageUrl: imageUrl, 
@@ -36,7 +37,6 @@ const getPodcastlists = async(req,res,next) => {
 const getUserPodcastLists = async(req,res,next) => {
     try {
         const userId = req.params.id;
-        console.log(req.params);
         
         const playlists = await UserPlaylist.find({ createdBy: userId });
     

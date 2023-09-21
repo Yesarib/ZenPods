@@ -12,6 +12,7 @@ const Profile = ({ currentUser }) => {
     const [newProfileImage, setNewProfileImage] = useState(null);
     const [userPlaylist, setUserPlaylist] = useState([]);
     const [user,setUser] = useState([]);
+    const [getSubs, setGetSubs] = useState([]);
     
     const userId = useParams();
 
@@ -83,10 +84,28 @@ const Profile = ({ currentUser }) => {
         }
     }
 
+    const getSubscription = async() => {
+        try {
+            const response = await userService.getSubscription(userId.id)
+            if(response) {
+                const users = []
+                for(let i=0; i<response.length; i++){
+                    const usersResponse = await userService.getUserById(response[i])
+                    users.push(usersResponse);
+                }
+                setGetSubs(users);
+                console.log(users);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     useEffect(() => {
         getUserById();
 
         getUserPlaylist();
+        getSubscription();
     }, [userId])
 
     useEffect(() => {
@@ -119,7 +138,7 @@ const Profile = ({ currentUser }) => {
                     />
                 </div>
                 <div className="flex flex-col mt-16 ml-7">
-                    <h1 className="ml-1.5">Profile</h1>
+                    <h1 className="ml-1.5 ">Profile</h1>
                     <h1
                         onClick={handleEditClick}
                         className="text-[72px] font-medium cursor-pointer"
@@ -127,20 +146,23 @@ const Profile = ({ currentUser }) => {
 
                         {user.firstName} {user.lastName}
                     </h1>
-                    <div className='mt-4'>
-                        <a href="#" className="ml-1.5 text-[15px]">
+                    <div className='mt-4 flex '>
+                        <a href="#" className="ml-1.5 text-[15px] text-gray-400">
                             {user?.subs?.length} Subscription
                         </a>
-                        {currentUser?._id !== userId.id && (
-                            <div>
-                                {!currentUser?.subs?.includes(userId.id) && (
-                                    <button onClick={subscribe} className='ml-10 text-[15px] w-36 text-center items-center bg-sky-800 rounded-2xl'> Subscribe </button>
-                                )}
-                                {currentUser?.subs?.includes(userId.id) && (
-                                    <button className='ml-10 text-[15px] w-36 text-center items-center bg-sky-800 rounded-2xl'> Subscribed </button>
-                                )}
-                            </div>
-                        )}
+                        <div className='flex flex-col'>
+                            {currentUser?._id !== userId.id && (
+                                <div>
+                                    {!currentUser?.subs?.includes(userId.id) && (
+                                        <button onClick={subscribe} className='ml-10 text-[15px] w-32 text-center items-center bg-red-800 rounded-md hover:bg-red-600 transition'> Subscribe </button>
+                                    )}
+                                    {currentUser?.subs?.includes(userId.id) && (
+                                        <button className='ml-10 text-[15px] w-32 text-center items-center bg-green-800 rounded-md hover:bg-green-600 transition'> Subscribed </button>
+                                    )}
+                                </div>
+                            )}
+                        </div>
+                        
                     </div>
                     
                 </div>
@@ -213,7 +235,7 @@ const Profile = ({ currentUser }) => {
 
             <div className="flex flex-col w-full mt-32 ml-10">
                 <div>
-                    <h1 className="text-[28px] font-medium ml-10"> Playlists </h1>
+                    <h1 className="text-[28px] font-semibold ml-10"> Playlists </h1>
                 </div>
                 <div className="flex mt-10">
                     {userPlaylist.map((playlist) => (
@@ -242,19 +264,24 @@ const Profile = ({ currentUser }) => {
                 </div>
             </div>
 
-            <div className="flex flex-col w-full mt-32 ml-10">
+            <div className="flex flex-col w-full mt-32 ml-10 mb-60">
                 <div>
-                    <h1 className="text-[28px] font-medium ml-10"> Subscriptions </h1>
+                    <h1 className="text-[28px] font-semibold ml-10"> Subscriptions </h1>
                 </div>
                 <div className="flex mt-10">
-                    {user?.subs?.map((sub, index) => (
-                        <div key={index} className="flex flex-col">
-                            <div className="flex flex-col">
-                                <div>
-                                    <img src={sub.imageUrl} alt={sub.title} className="w-48" />
+                    {getSubs?.map((sub, index) => (
+                        <Link key={index} to={`/profile/${sub._id}`}>
+                            <div className="flex flex-col ml-10">
+                                <div className="flex flex-col">
+                                    <div>
+                                        <img src={`http://localhost:8000/assets/${sub.profileImage}` || sub.profileImage} alt={sub.firstName} className="w-32 rounded-xl max-h-[110px]" />
+                                    </div>
+                                    <div className='mt-2'>
+                                        <h1 className='text-[18px] font-medium'> {sub.firstName} {sub.lastName} </h1>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        </Link>
                     ))}
                 </div>
             </div>

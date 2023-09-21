@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { useState, useEffect} from 'react'
 import { useParams } from 'react-router-dom'
 import podcastListService from '../Services/PodcastList'
@@ -5,7 +6,7 @@ import PodcastListDetailUpper from  '../Components/PlayList/PodcastListDetailUpp
 import Episodes from '../Components/PlayList/Episodes';
 import episodesService from '../Services/Episode';
 
-const PodcastList = () => {
+const PodcastList = ({user}) => {
     const [podcastList, setPodcastList] = useState([]);
     const [playlists, setPlaylists] = useState([]);
     const [episodes, setEpisodes] = useState([]);
@@ -13,7 +14,7 @@ const PodcastList = () => {
 
     const getPodcastLits = async() => {
         try {
-            const data = await podcastListService.getUserPodcastList();
+            const data = await podcastListService.getUserPodcastList(user._id);
             if (data) {
                 setPlaylists(data);
             }
@@ -46,7 +47,7 @@ const PodcastList = () => {
 
     return (
         <div>
-            <PodcastListDetailUpper podcastlist={podcastList}/>
+            <PodcastListDetailUpper podcastlist={podcastList} user={user}/>
             <Episodes episodes={episodes} playlist={playlists} />
         </div>
     )

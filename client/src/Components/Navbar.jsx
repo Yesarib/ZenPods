@@ -17,7 +17,7 @@ const Navbar = ({ user }) => {
     return (
         <div className="w-full flex justify-between items-center text-white mt-10">
             <div className="justify-center items-center text-center">
-                <h2 className="text-[36px] ml-20 font-medium tracking-widest">
+                <h2 className="text-[36px] ml-20 font-semibold tracking-widest ">
                     ZenPods
                 </h2>
             </div>

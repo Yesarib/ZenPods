@@ -29,6 +29,41 @@ const subscription = async(subscriptionUserId, userId) => {
     }
 }
 
+const getSubscription = async(userId) => {
+    try {
+        return await axios.get(BASE_URL + "/auth/getSubscription/"+userId).then((res) => {
+            if(res) {
+                return res.data
+            }
+        })
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+const addPlaylist = async(playlistId, userId) => {
+    try {
+        const response = await axios.post(BASE_URL + "/auth/addPlaylist/"+playlistId,{ userId })
+        if (response) {
+            return response.data
+        }
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+const removePlaylist = async(playlistId, userId) => {
+    try {
+        const response = await axios.post(BASE_URL + "/auth/removePlaylist/"+playlistId,{ userId })
+        if (response) {
+            return response.data
+        }
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+
 const updateUser = async (userId, formData) => {
     try {
         const response = await axios.put(BASE_URL + "/updateUser/" + userId, formData, {
@@ -49,7 +84,10 @@ const updateUser = async (userId, formData) => {
 const userService = {
     getUserById,
     updateUser,
-    subscription
+    subscription,
+    addPlaylist,
+    removePlaylist,
+    getSubscription
 }
 
 export default userService;

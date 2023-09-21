@@ -1,3 +1,4 @@
+const UserPlaylist = require('../Models/UserPlaylist.js');
 const User = require('../Models/Users.js');
 const createError = require('http-errors')
 
@@ -37,6 +38,58 @@ const subscription = async(req,res,next) => {
     }
 }
 
+const getSubscription = async(req,res,next) => {
+    try {
+        const { userId } = req.params;
+
+        const user = await User.findById(userId);
+
+        if (!user) throw createError.NotFound('User not found');
+
+        res.status(200).json(user.subs);
+    } catch (error) {
+        next(error)
+    }
+}
+
+const addPlaylist = async(req,res,next) => {
+    try {
+        const { playlistId } = req.params;
+        const { userId } = req.body;
+
+        const playlist = await UserPlaylist.findById(playlistId)
+        const user = await User.findById(userId);
+
+        if (!playlist && !user ) throw createError.NotFound('No user or playlist');
+
+        user.playlist.push(playlistId);
+        user.save();
+        
+        res.status(200).json(user);
+    } catch (error) {
+        next(error)
+    }
+}
+
+const removePlaylist = async(req,res,next) => {
+    try {
+        const { playlistId } = req.params;
+        const { userId } = req.body;
+        console.log(userId);
+
+        const user = await User.findById(userId);
+        if (!user ) throw createError.NotFound('No user or playlist');
+
+        user.playlist.pop(playlistId);
+        user.save();
+
+        res.status(200).json(user)
+    } catch (error) {
+        next(error)
+    }
+}
+
+
 const updateUser = async (req, res, next) => {
     try {
         const { userId } = req.params;
@@ -67,5 +120,8 @@ const updateUser = async (req, res, next) => {
 module.exports = {
     getUserById,
     updateUser,
-    subscription
+    addPlaylist,
+    removePlaylist,
+    subscription,
+    getSubscription,
 }

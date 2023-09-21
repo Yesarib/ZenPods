@@ -2,14 +2,16 @@
 /* eslint-disable react/prop-types */
 import React, { useState, useRef, useEffect } from 'react';
 import podcastListService from '../../Services/PodcastList';
+import userService from '../../Services/User'
 
-const PodcastListDetailUpper = ({ podcastlist }) => {
+const PodcastListDetailUpper = ({ podcastlist,user }) => {
     const [isEditing, setIsEditing] = useState(false);
     const [title, setTitle] = useState("")
     const [description, setDescription] = useState("")
     const [newImage, setNewImage] = useState(null);
-
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
     const popUpRef = useRef(null);
+
 
     const handleEditClick = () => {
         setIsEditing(true);
@@ -26,6 +28,28 @@ const PodcastListDetailUpper = ({ podcastlist }) => {
             overlayIcon.style.display = "none";
         }
     };
+
+    const handleMenuClick = () => {
+        setIsMenuOpen(!isMenuOpen);
+    };
+
+
+
+    const addToLibrary = async() => {
+        const response = await userService.addPlaylist(podcastlist._id, user._id);
+        if (response) {
+            setIsMenuOpen(!isMenuOpen)
+            console.log('Playlist successfuly added to library');
+        }
+    }
+
+    const removeToLibrary = async() => {
+        const response = await userService.removePlaylist(podcastlist._id, user._id);
+        if (response) {
+            setIsMenuOpen(!isMenuOpen)
+            console.log('Playlist successfuly removed on library');
+        }
+    }
 
     const updatePodcastlist = async() => {
         const formData = new FormData();
@@ -82,8 +106,24 @@ const PodcastListDetailUpper = ({ podcastlist }) => {
                 </div>
                 <div className='flex items-center mt-10 ml-10 '>
                     <div className='flex items-center justify-center text-center'>
-                        <h1 className='text-[48px] text-[#727272] cursor-pointer transform hover:text-white '> ... </h1>
+                        <h1 className='text-[48px] text-[#727272] cursor-pointer transform hover:text-white ' onClick={handleMenuClick}> ... </h1>
+                        {isMenuOpen && (
+                            <div className='w-56 mb-2 ml-2 bg-black border border-gray-800 p-2 rounded-xl cursor-pointer'>
+                                <ul>
+                                    <li className='w-full hover:bg-[#292929] rounded-lg text-[15px]'>
+                                        {user.playlist.includes(podcastlist._id) && (
+                                            <h1 onClick={removeToLibrary}> Remove From Your Library </h1>
+                                        )}
+                                        {!user.playlist.includes(podcastlist._id) && (
+                                            <h1 onClick={addToLibrary}> Add Your Library </h1>
+                                        )}
+                                    </li>
+                                    <li className='w-full mt-1 hover:bg-[#292929] rounded-lg text-[15px]'> Share </li>
+                                </ul>
+                            </div>
+                        )}
                     </div>
+                    
                 </div>
             </div>
 

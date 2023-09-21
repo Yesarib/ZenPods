@@ -22,9 +22,9 @@ const UserSchema = new Schema({
         type: String,
         required : true,
     },
-    podcasts: [{
+    playlist: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Podcast'
+        ref: 'UserPlaylist'
     }],
     subs: [{
         type: mongoose.Schema.Types.ObjectId,
@@ -34,6 +34,7 @@ const UserSchema = new Schema({
         type:String,
         default:"https://www.vhv.rs/dpng/d/555-5558210_z-letter-png-logo-transparent-png.png"
     },
+
     notifications: Boolean
 })
 
