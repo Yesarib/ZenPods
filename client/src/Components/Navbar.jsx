@@ -25,7 +25,9 @@ const Navbar = ({ user }) => {
             {user && (
                     <div className="relative group flex">
                         <div className="mt-2">
-                            <a href="/#"> Upload </a>
+                            {user.role === 'artist' && (
+                                <a href="/upload"> Upload </a>
+                            )}
                         </div>
                     
                         <div onClick={toggleMenu} className="ml-5">
@@ -38,7 +40,7 @@ const Navbar = ({ user }) => {
                             <a href={`/profile/${user._id}`} className="block px-4 py-2 text-gray-800 hover:bg-gray-200">
                                 Profil
                             </a>
-                            <a href="#" className="block px-4 py-2 text-gray-800 hover:bg-gray-200" onClick={logout}>
+                            <a href="/" className="block px-4 py-2 text-gray-800 hover:bg-gray-200" onClick={logout}>
                                 Çıkış
                             </a>
                         </div>

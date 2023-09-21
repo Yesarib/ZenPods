@@ -47,8 +47,10 @@ const getPodcastById = async(id) => {
 
 const getUserPodcasts = async(id) => {
     try {
-        return await axios.get(BASE_URL + "/api/" + id + "/getUserPodcasts").then((res) => {
-            if (res) {
+        return await axios.get(BASE_URL + `/api/getUserPodcasts?userId=${id}`, {
+            id
+        }).then((res) => {
+            if(res){
                 return res.data
             }
         })

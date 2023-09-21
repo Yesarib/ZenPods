@@ -6,6 +6,6 @@ const router = express.Router();
 router.post('/newPodcast', newPodcast);
 router.get('/allPodcast', allPodcasts);
 router.get("/getPodcastById/:podcastId",getPodcastById)
-router.get('/getUserPodcasts/:id', getUserPodcasts);
+router.get('/getUserPodcasts', getUserPodcasts);
 
 module.exports = router

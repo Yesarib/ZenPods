@@ -47,8 +47,9 @@ const getPodcastById = async(req,res,next) => {
 
 const getUserPodcasts = async(req,res,next) => {
     try {
-        const { id } = req.params;
-        const podcasts = await Podcast.findById({ _id: id })
+        console.log(req.body);
+        const { userId } = req.query;
+        const podcasts = await Podcast.find({uploadedBy: {$in:userId}})
         res.status(200).json(podcasts); 
     } catch (error) {
         next(error)

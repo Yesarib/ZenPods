@@ -34,7 +34,10 @@ const UserSchema = new Schema({
         type:String,
         default:"https://www.vhv.rs/dpng/d/555-5558210_z-letter-png-logo-transparent-png.png"
     },
-
+    role: {
+        type:String,
+        default: 'user'
+    },
     notifications: Boolean
 })
 

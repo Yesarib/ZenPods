@@ -19,7 +19,7 @@ const Home = () => {
 
   return (
     <div>
-      <Content podcasts={podcasts}/>
+      <Content podcasts={podcasts} name={'Podcasts'} ml={'ml-20'} margin={'m-6'} to={'/podcast/'}/>
     </div>
   )
 }

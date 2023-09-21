@@ -13,6 +13,7 @@ import Genre from './Pages/Genre';
 import Register from './Pages/Register';
 import Sidebar from './Components/Sidebar'
 import authService from './Services/Auth';
+import Upload from './Pages/Upload';
 
 const App = () => {
   const [user, setUser] = useState(null);
@@ -48,6 +49,7 @@ const App = () => {
                 <Route path='/podcast/:id' element={<Podcast user={user} />} />
                 <Route path='/podcastlist/:id' element={<Playlist user={user}/>} />
                 <Route path='/profile/:id' element={<Profile currentUser={user} />} />
+                <Route path='/upload' element={<Upload user={user} />} />
                 <Route path='/login' element={<Login />} />
                 <Route path='/register' element={<Register />} />
               </Routes>
