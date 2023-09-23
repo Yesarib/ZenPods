@@ -4,7 +4,7 @@ const { newEpisode, getEpisodes, getPodcastEpisodesById, getEpisodesById } = req
 
 const router = express.Router();
 
-router.post('/:podcastId/newEpisode', newEpisode);
+// router.post('/newEpisode/:podcastId', newEpisode);
 router.get('/getEpisodes', getEpisodes);
 router.get('/getEpisodesById', getEpisodesById);
 router.get('/getPodcastEpisodesById/:podcastId', getPodcastEpisodesById);

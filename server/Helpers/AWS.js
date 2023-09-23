@@ -37,13 +37,11 @@ const getS3FileUrl = async(bucketName, objectKey) => {
     });
 }
 
-const uploadFileToS3 = async(bucketName, fileKey, filePath) => {
-    const fileStream = fs.createReadStream(filePath);
-
+const uploadFileToS3 = async(bucketName, fileKey, fileBuffer) => {
     const params = {
         Bucket: bucketName,
         Key: fileKey,
-        Body: fileStream,
+        Body: fileBuffer,
     };
 
     return new Promise((resolve, reject) => {

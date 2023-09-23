@@ -15,6 +15,7 @@ import Sidebar from './Components/Sidebar'
 import authService from './Services/Auth';
 import Upload from './Pages/Upload';
 import PodcastDetail from './Components/Upload/PodcastDetail';
+import UploadDetail from './Pages/UploadDetail';
 
 const App = () => {
   const [user, setUser] = useState(null);
@@ -51,7 +52,7 @@ const App = () => {
                 <Route path='/podcastlist/:id' element={<Playlist user={user}/>} />
                 <Route path='/profile/:id' element={<Profile currentUser={user} />} />
                 <Route path='/upload' element={<Upload user={user} />} />
-                <Route path='/upload/podcast/:id' element={<PodcastDetail />} />
+                <Route path='/upload/podcast/:id' element={<UploadDetail user={user} />} />
                 <Route path='/login' element={<Login />} />
                 <Route path='/register' element={<Register />} />
               </Routes>
@@ -60,7 +61,7 @@ const App = () => {
         </div>
       </div>
       {user && (
-        <div className='fixed bottom-0 left-0 w-full mt-10'>
+        <div className='fixed bottom-0 left-0 w-full '>
           <EpisodeCard />
         </div>
       )}

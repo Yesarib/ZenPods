@@ -16,6 +16,7 @@ const categoryRoutes = require('./Routes/Category.js')
 const searchRoutes = require('./Routes/Search.js');
 const { updateUser } = require('./Controllers/User.js');
 const { updatePlaylist } = require('./Controllers/PodcastList.js');
+const { newEpisode } = require('./Controllers/Episode.js');
 
 dotenv.config()
 require('./Helpers/init_mongoDB.js')
@@ -40,9 +41,13 @@ const storage = multer.diskStorage({
         cb(null, file.originalname)
     }
 });
+const audioStorage = multer.memoryStorage();
 const upload = multer({ storage });
+const audioUpload = multer({ storage : audioStorage})
+
 
 app.use('/auth', authRoutes, userRoute);
+app.post('/newEpisode/:podcastId', audioUpload.single('audioUrl'), newEpisode)
 app.put('/updateUser/:userId', upload.single('profileImage'), updateUser)
 app.put('/updatePodcastList/:id', upload.single('imageUrl'), updatePlaylist)
 app.use('/api', podcastRoutes, episodeRoutes, reviewRoutes, podcastlistRoutes, categoryRoutes, searchRoutes);

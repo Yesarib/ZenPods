@@ -7,7 +7,6 @@ const newEpisode = async (req, res, next) => {
     try {
         const { podcastId } = req.params;
         const { title, description, imageUrl, publishedBy } = req.body;
-
         const audioFile = req.file
 
         if (!audioFile) throw createError[400]('Audio File is required')
@@ -15,7 +14,9 @@ const newEpisode = async (req, res, next) => {
         const podcast = await Podcast.findById(podcastId);
         if (!podcast) throw createError[404]('Podcast not found');
 
-        const s3AudioUrl = await uploadFileToS3('podcastbucket23', 'audio/'+ audioFile.filename, audioFile.buffer)
+        const cleanFileName = audioFile.originalname.replace(/[^a-zA-Z0-9-_]/g, '') + '.mp3';
+        const audioBuffer = Buffer.from(audioFile.buffer);
+        const s3AudioUrl = await uploadFileToS3('podcastbucket23', 'audio/'+ cleanFileName, audioBuffer)
 
         const newEpisode = new Episode({
             title: title,

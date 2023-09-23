@@ -16,7 +16,7 @@ const EpisodeCard = () => {
     console.log(nowPlayingPodcast);
 
     return (
-        <div className='text-white mt-36 text-center bg-black'>
+        <div className='text-white text-center bg-black'>
             {nowPlayingPodcast ? (
                 <div className='flex justify-between items-center text-center  ml-2'>
                     <div className='flex w-1/3'>
