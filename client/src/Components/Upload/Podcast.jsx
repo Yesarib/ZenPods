@@ -36,7 +36,7 @@ const Podcast = ({user}) => {
                     You don't currently have a podcast. You can create it now.
                 </div>
             )}
-            <Content podcasts={podcasts} name={'Your Podcasts'} margin={'m-2'} to={'/upload/podcast/'} />
+            <Content items={podcasts} name={'Your Podcasts'} margin={'m-2'} to={'/upload/podcast/'} />
         </div>
     )
 }

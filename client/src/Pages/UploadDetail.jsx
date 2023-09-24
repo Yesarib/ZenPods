@@ -31,12 +31,12 @@ const UploadDetail = ({user}) => {
                         <div >
                             <PodcastDetail user={user}/>
                         </div>
-                        <div className="flex justify-end items-center mr-20 mt-5">
+                        <div className="flex justify-end items-center mr-20 mt-5 mb-16">
                             <button
                                 className="bg-sky-800 w-52 h-10 rounded-xl transform hover:scale-105"
                                 onClick={handleCreatePodcastClick}
                             >
-                                Create New Podcast
+                                Upload New Episode
                             </button>
                         </div>
                     </div>

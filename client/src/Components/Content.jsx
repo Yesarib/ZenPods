@@ -1,31 +1,99 @@
 /* eslint-disable react/prop-types */
-import { Link } from 'react-router-dom'
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
-const Content = ({podcasts, name, ml, margin, to}) => {
+const Content = ({ items, episodes, name, ml, margin, to }) => {
+    const [pageNumber, setPageNumber] = useState(0);
+    const [episodePageNumber, setEpisodePageNumber] = useState(0);
+    const projectsPerPage = 4;
+
+
+    // ITEMS
+    const pageCount = Math.ceil(items.length / projectsPerPage);
+    const pagesVisited = pageNumber * projectsPerPage;
+    const displayedItems = items.slice(
+        pagesVisited,
+        pagesVisited + projectsPerPage
+    );
+
+    const changePage = (amount) => {
+        const newPageNumber = pageNumber + amount;
+        if (newPageNumber >= 0 && newPageNumber < pageCount) {
+            setPageNumber(newPageNumber);
+        }
+    };
+
+    // EPISODES
+    const episodePageCount = Math.ceil(episodes?.length / projectsPerPage);
+    const episodePagesVisited = episodePageNumber * projectsPerPage;
+    const episodeDisplayedItems = episodes?.slice(
+        episodePagesVisited,
+        episodePagesVisited + projectsPerPage
+    );
+    const changeEpisodePages = (amount) => {
+        const newEpisodePageNumber = episodePageNumber + amount;
+        if (newEpisodePageNumber >= 0 && newEpisodePageNumber < episodePageCount) {
+            setEpisodePageNumber(newEpisodePageNumber);
+        }
+    };
     
+
     return (
         <div className='text-white justify-center items-center text-center'>
             <h1 className={`flex justify-start items-start ${ml} mt-10 text-[24px] font-semibold`}> {name} </h1>
-            <div className='flex flex-col '>
-                <div className='flex justify-start items-center ml-10'>
-                    {podcasts.map((podcast,index) => (
-                        <Link key={index} to={`${to}${podcast._id}`}>
-                            <div className={`${margin} flex flex-col bg-[#121212] w-72 justify-center items-center rounded-3xl hover:bg-[#1a1a1a] hover:scale-105`}>
-                                <div className='w-60 flex flex-col'>
-                                    <img src={podcast.imageUrl} alt={podcast.title} className='w-52 max-h-32 mt-6 rounded-xl object-cover' />
-                                    <div className='flex flex-col mt-3 ml-1 mb-5'>
-                                        <h1 className='flex justify-start items-start text-start text-[18px] font-medium'> {podcast.title} </h1>
-                                        <h1 className='flex justify-start items-start text-start text-[15px] font-normal text-[#9b9a9a]'> {podcast.description.substring(0,50)}... </h1>
+            <div className="flex ml-20 space-x-10">
+                <button onClick={() => changePage(-1)} disabled={pageNumber === 0} className='text-[32px] font-semibold'>{"<"}</button>
+                <button onClick={() => changePage(1)} disabled={pageNumber === pageCount - 1} className='text-[32px] font-semibold'>{">"}</button>
+            </div>
+            <div className="w-full grid grid-cols-1 gap-10 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 mt-6 ml-20">
+                {displayedItems.map((podcast, index) => (
+                    <Link key={index} to={`${to}${podcast._id}`} className=''>
+                        <div className="bg-gray-800 rounded-lg overflow-hidden hover:scale-105 transition-transform">
+                            <img
+                                src={podcast.imageUrl}
+                                alt={podcast.title}
+                                className="w-full h-48 object-cover"
+                            />
+                            <div className="p-4">
+                                <h1 className="text-xl font-medium mb-2">{podcast.title}</h1>
+                                <p className="text-sm text-gray-400">{podcast.description.substring(0, 50)}...</p>
+                            </div>
+                        </div>
+                    </Link>
+                ))}
+            </div>
+            {episodes && (
+                <div className='w-full mb-16'>
+                    <h1 className={`flex justify-start items-start ${ml} mt-10 text-[24px] font-semibold`}> Episodes </h1>
+                    <div className="flex ml-20 space-x-10">
+                        <button onClick={() => changeEpisodePages(-1)} className='text-[32px] font-semibold'>{"<"}</button>
+                        <button onClick={() => changeEpisodePages(1)} className='text-[32px] font-semibold'>{">"}</button>
+                    </div>
+
+                    {episodes.length > 0 && (
+                        <div className="w-full grid grid-cols-1 gap-10 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 mt-6 ml-20">
+                        {episodeDisplayedItems.map((episode, index) => (
+                            <Link key={index} to={`${to}${episode._id}`}>
+                                <div className="bg-gray-800 rounded-lg overflow-hidden hover:scale-105 transition-transform">
+                                    <img
+                                        src={episode.imageUrl}
+                                        alt={episode.title}
+                                        className="w-full h-48 object-cover"
+                                    />
+                                    <div className="p-4">
+                                        <h1 className="text-xl font-medium mb-2">{episode.title}</h1>
+                                        <p className="text-sm text-gray-400">{episode.description.substring(0, 50)}...</p>
                                     </div>
                                 </div>
-                                
-                            </div>
-                        </Link>                        
-                    ))}
-                </div>                
-            </div>
+                            </Link>
+                        ))}
+                    </div>
+                    )}
+                </div>
+            )}
+
         </div>
     );
-}
+};
 
 export default Content;

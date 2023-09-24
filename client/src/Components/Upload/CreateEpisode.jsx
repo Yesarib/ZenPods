@@ -9,6 +9,7 @@ const CreateEpisode = ({ user }) => {
   const [description, setDescription] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const [audioUrl, setAudioUrl] = useState("");
+  const [showSuccessPopup, setShowSuccessPopup] = useState(false);
 
   const navigate = useNavigate();
   const { id } = useParams()
@@ -29,7 +30,11 @@ const CreateEpisode = ({ user }) => {
     
     const response = await episodesService.newEpisode(id,formData)
     if (response) {
-      // navigate('/upload')
+      navigate(`/upload/${id}`)
+      setShowSuccessPopup(true); 
+      setTimeout(() => {
+        setShowSuccessPopup(false); 
+      }, 3000);
       console.log('Episode successfuly created');
     }
   }
@@ -92,8 +97,20 @@ const CreateEpisode = ({ user }) => {
           </button>
         </div>
       </form>
+      {showSuccessPopup && <SuccessPopup />}
     </div>
   )
 }
 
 export default CreateEpisode
+
+
+const SuccessPopup = () => {
+  return (
+    <div className="fixed inset-0 flex items-center justify-center z-10">
+      <div className="bg-green-500 text-white px-4 py-2 rounded shadow">
+        Episode successfully uploaded!
+      </div>
+    </div>
+  );
+};

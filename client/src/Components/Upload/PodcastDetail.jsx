@@ -67,11 +67,20 @@ const PodcastDetail = ({user}) => {
                         <h1> There is no episodes for this podcast. You can add episodes now... </h1>
                     </div>
                 )}
-                {episodes?.map((episode) => (
-                    <div className='w-full flex flex-col' key={episode._id}>
-                        Episodeler
-                    </div>
-                ))}
+                <div className='w-full flex'>
+                    {episodes?.map((episode) => (
+                        <div className='w-full cursor-pointer' key={episode._id}>
+                            <div className='flex flex-col'>
+                                <img src={episode.imageUrl} alt={episode.title} className='w-52 max-h-32 mt-6 rounded-xl object-cover'/>
+                                <div className='flex flex-col mt-3 ml-1 mb-5'>
+                                        <h1 className='flex justify-start items-start text-start text-[18px] font-medium'> {episode.title} </h1>
+                                        <h1 className='flex justify-start items-start text-start text-[15px] font-normal text-[#9b9a9a]'> {episode.description.substring(0,50)}... </h1>
+                                    </div>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+                
             </div>
         </div>
     
