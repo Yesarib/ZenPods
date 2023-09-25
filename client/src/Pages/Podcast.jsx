@@ -48,7 +48,7 @@ const Podcast = ({user}) => {
         <div className='text-white w-full flex'>
             <div className="w-full mb-10">
                 <PodcastDetailUpper podcastDetail={podcast}/>
-                <Episodes playlist={playlist}/>
+                <Episodes playlist={playlist} user={user}/>
             </div>
         </div>
     )

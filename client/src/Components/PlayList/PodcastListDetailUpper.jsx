@@ -95,6 +95,7 @@ const PodcastListDetailUpper = ({ podcastlist,user }) => {
                 <div className='flex flex-col ml-4 mt-24'>
                     <h1 className='text-[16px] font-medium '> Podcast List </h1>
                     <h1 onClick={handleEditClick} className='text-[60px] font-bold cursor-pointer'> {podcastlist.title} </h1>
+                    <p> {podcastlist.description} </p>
                 </div>
             </div>
 

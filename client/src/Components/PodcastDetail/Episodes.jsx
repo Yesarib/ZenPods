@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom';
 import { usePodcastContext } from '../../Context/PodcastContext';
 import podcastListService from '../../Services/PodcastList';
 
-const Episodes = ({playlist}) => {
+const Episodes = ({playlist, user}) => {
     const [episodes, setEpisodes] = useState([]);
     const { id } = useParams();
     const { startPodcast } = usePodcastContext();
@@ -76,9 +76,11 @@ const Episodes = ({playlist}) => {
         };
     }, []);
 
+    console.log(playlist);
+
     return (
         <div className='w-full mt-10 ml-10 mb-10'>
-            <table cellPadding="15" className="table-fixed">
+            <table cellPadding="15" className="table-fixed mb-36">
                 <thead className='text-center'>
                     <tr>
                         <th className="w-1/12 text-start px-0">#</th>
@@ -126,7 +128,14 @@ const Episodes = ({playlist}) => {
                                     <h1> {episode.listenCount} </h1>
                                     <div className='text-center items-center justify-center'>
                                         <div className='menu-container relative ml-10'>
-                                            <div className='text-[32px] cursor-pointer' onClick={() => toggleMenu(episode._id)}> ... </div>
+                                            <button className='w-3 h-8 flex items-center justify-center cursor-pointer ' onClick={() => toggleMenu(episode._id)}>
+                                                <div className='flex'>
+                                                    <div className="w-1.5 h-1.5 bg-gray-500 rounded-full "></div>
+                                                    <div className="w-1.5 h-1.5 bg-gray-500 rounded-full ml-1"></div>
+                                                    <div className="w-1.5 h-1.5 bg-gray-500 rounded-full ml-1"></div>
+                                                </div>
+                                            </button>
+                                            
                                             <div className={`absolute ${isMenuOpen === episode._id ? 'block' : 'hidden'} ml-10 w-36`} style={{ bottom: '100%' }}>
                                                 <button
                                                     className='bg-gray-800 w-36 rounded-xl text-[17px]'
@@ -136,13 +145,13 @@ const Episodes = ({playlist}) => {
                                                 </button>
                                                 <div className={`absolute  ${isPlaylistMenuOpen === episode._id ? 'block' : 'hidden'} ml-10 w-36`}>
                                                     <div className='flex flex-col text-white'>
-                                                        {playlist.map((pl) => (
+                                                        {playlist.map((pl,index) => (
                                                             <button 
-                                                                key={pl._id}
+                                                                key={index}
                                                                 onClick={() => addToPlaylist(pl._id,episode._id)}
                                                                 className='text-[17px] mt-2'
                                                             >
-                                                                {pl.title}
+                                                                {pl._id.toString()}
                                                             </button>
                                                         ))}
                                                     </div>

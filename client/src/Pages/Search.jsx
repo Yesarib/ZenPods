@@ -4,6 +4,7 @@ import podcastService from '../Services/Podcasts';
 import categoryService from '../Services/Category';
 import { Link } from 'react-router-dom';
 import searchService from '../Services/Search';
+import Content from '../Components/Content';
 
 const Search = () => {
     const [episodes, setEpisodes] = useState([]);
@@ -94,50 +95,8 @@ const Search = () => {
                     </>
                 )}
 
-                {episodes && episodes.length > 0 && (
-                    <>
-                        <h1 className='text-[28px] font-medium mt-16'> Popular Episodes </h1>
-                        <div className='flex flex-wrap'>
-                            {episodes.map((episode, index) => (
-                                <Link key={index}>
-                                    <div className='w-60 m-2'>
-                                        <div className='rounded-xl shadow-md p-4 hover:shadow-lg transition duration-300'>
-                                            <img
-                                                src={episode.imageUrl}
-                                                alt={episode.title}
-                                                className='max-h-28 w-full rounded-lg object-cover'
-                                            />
-                                            <h1 className='text-lg font-semibold mt-2'>{episode.title}</h1>
-                                            <p className='text-gray-400 text-sm mt-1'>{episode.publishedBy}</p>
-                                        </div>
-                                    </div>
-                                </Link>
-                            ))}
-                        </div>
-                    </>
-                )}
-
-                {podcasts && podcasts.length > 0 && (
-                    <>
-                        <h1 className='text-[28px] font-medium mt-16'> Popular Podcasts </h1>
-                        <div className='flex flex-wrap'>
-                            {podcasts.map((podcast, index) => (
-                                <Link key={index} to={`/podcast/${podcast._id}`}>
-                                    <div className='w-60 m-2'>
-                                        <div className='rounded-xl shadow-md p-4 hover:shadow-lg transition duration-300'>
-                                            <img
-                                                src={podcast.imageUrl}
-                                                alt={podcast.title}
-                                                className='max-h-28 w-full rounded-lg object-cover'
-                                            />
-                                            <h1 className='text-lg font-semibold mt-2'>{podcast.title}</h1>
-                                            <p className='text-gray-400 text-sm mt-1'>{podcast.uploadedBy}</p>
-                                        </div>
-                                    </div>
-                                </Link>
-                            ))}
-                        </div>
-                    </>
+                {episodes && episodes.length > 0 && podcasts && podcasts.length > 0 && (
+                    <Content items={podcasts} episodes={episodes} name={"Podcast"} ml={"0"} />
                 )}
 
 

@@ -52,6 +52,21 @@ const getSubscription = async(req,res,next) => {
     }
 }
 
+const getSubscriber = async(req,res,next) => {
+    try {
+        const { userId } = req.params;
+
+        const user = await User.findById(userId);
+
+        if (!user) throw createError.NotFound('User not found');
+
+        res.status(200).json(user.subscribers);
+
+    } catch (error) {
+        next(error)
+    }-
+}
+
 const addPlaylist = async(req,res,next) => {
     try {
         const { playlistId } = req.params;
@@ -123,5 +138,6 @@ module.exports = {
     addPlaylist,
     removePlaylist,
     subscription,
+    getSubscriber,
     getSubscription,
 }

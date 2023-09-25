@@ -48,7 +48,7 @@ const PodcastList = ({user}) => {
     return (
         <div>
             <PodcastListDetailUpper podcastlist={podcastList} user={user}/>
-            <Episodes episodes={episodes} playlist={playlists} />
+            <Episodes episodes={episodes} playlist={playlists} user={user} />
         </div>
     )
 }

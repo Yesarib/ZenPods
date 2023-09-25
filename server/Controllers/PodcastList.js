@@ -10,6 +10,11 @@ const createNewPodcastList = async(req,res,next) => {
         const { title, imageUrl } = req.body; 
         const userId = req.params.id;
     
+        const user = await User.findById(userId);
+
+        if (!user) throw createError.NotFound('There is no user'); 
+
+        
         const newPlaylist = new UserPlaylist({
             title: title, 
             imageUrl: imageUrl, 
@@ -17,7 +22,10 @@ const createNewPodcastList = async(req,res,next) => {
             episodes: [],
         });
 
+        user.playlist.push(newPlaylist._id);
+
         await newPlaylist.save();
+        await user.save();
         res.status(201).json(newPlaylist);
     } catch (error) {
         next(error);

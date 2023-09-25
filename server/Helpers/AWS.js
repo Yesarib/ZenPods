@@ -42,6 +42,7 @@ const uploadFileToS3 = async(bucketName, fileKey, fileBuffer) => {
         Bucket: bucketName,
         Key: fileKey,
         Body: fileBuffer,
+        ACL: 'public-read',
     };
 
     return new Promise((resolve, reject) => {

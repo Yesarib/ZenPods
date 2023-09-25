@@ -1,12 +1,19 @@
 /* eslint-disable react/prop-types */
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { usePodcastContext } from '../Context/PodcastContext';
 
 const Content = ({ items, episodes, name, ml, margin, to }) => {
     const [pageNumber, setPageNumber] = useState(0);
     const [episodePageNumber, setEpisodePageNumber] = useState(0);
     const projectsPerPage = 4;
+    const { startPodcast } = usePodcastContext();
 
+
+    const handleStartPodcast = (selectedPodcast) => {
+        startPodcast(selectedPodcast);
+        localStorage.setItem('selectedPodcast', JSON.stringify(selectedPodcast));
+    };
 
     // ITEMS
     const pageCount = Math.ceil(items.length / projectsPerPage);
@@ -54,8 +61,8 @@ const Content = ({ items, episodes, name, ml, margin, to }) => {
                                 alt={podcast.title}
                                 className="w-full h-48 object-cover"
                             />
-                            <div className="p-4">
-                                <h1 className="text-xl font-medium mb-2">{podcast.title}</h1>
+                            <div className="p-4 text-start">
+                                <h1 className="text-xl font-medium mb-2">{podcast.title.substring(0,15)}...</h1>
                                 <p className="text-sm text-gray-400">{podcast.description.substring(0, 50)}...</p>
                             </div>
                         </div>
@@ -71,21 +78,21 @@ const Content = ({ items, episodes, name, ml, margin, to }) => {
                     </div>
 
                     {episodes.length > 0 && (
-                        <div className="w-full grid grid-cols-1 gap-10 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 mt-6 ml-20">
+                        <div className="w-full grid grid-cols-1 gap-10 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 mt-6 ml-20 mb-32">
                         {episodeDisplayedItems.map((episode, index) => (
-                            <Link key={index} to={`${to}${episode._id}`}>
+                            <div key={index} onClick={() => handleStartPodcast(episode)} className='cursor-pointer'>
                                 <div className="bg-gray-800 rounded-lg overflow-hidden hover:scale-105 transition-transform">
                                     <img
                                         src={episode.imageUrl}
                                         alt={episode.title}
                                         className="w-full h-48 object-cover"
                                     />
-                                    <div className="p-4">
-                                        <h1 className="text-xl font-medium mb-2">{episode.title}</h1>
+                                    <div className="p-4 text-start">
+                                        <h1 className="text-xl font-medium mb-2">{episode.title.substring(0,15)}</h1>
                                         <p className="text-sm text-gray-400">{episode.description.substring(0, 50)}...</p>
                                     </div>
                                 </div>
-                            </Link>
+                            </div>
                         ))}
                     </div>
                     )}

@@ -15,13 +15,13 @@ const Sidebar = ({ user }) => {
             <div className="w-full h-36 rounded-3xl  p-4">
                 <div className="flex items-center mb-4">
                     <img src="/home.png" alt="home" className="w-8" />
-                    <a href="/" className="ml-2 text-lg font-medium">
+                    <a href="/" className={`ml-2 text-lg font-medium ${window.location.pathname === '/' ? 'text-green-500' : ''}`}>
                         Home
                     </a>
                 </div>
                 <div className="flex items-center">
                     <img src="/search.png" alt="search" className="w-6 h-6" />
-                    <a href="/search" className="ml-2 text-lg font-medium">
+                    <a href="/search" className={`ml-4 text-lg font-medium ${window.location.pathname === '/search' ? 'text-green-500' : ''}`}>
                         Search
                     </a>
                 </div>

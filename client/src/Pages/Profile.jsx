@@ -4,6 +4,8 @@ import React, { useEffect, useState, useRef } from 'react'
 import podcastListService from '../Services/PodcastList';
 import userService from '../Services/User';
 import { Link, useParams } from 'react-router-dom';
+import Playlists from '../Components/Profile/Playlists';
+import Subscription from '../Components/Profile/Subscription';
 
 const Profile = ({ currentUser }) => {
     const [isEditing, setIsEditing] = useState(false);
@@ -150,6 +152,9 @@ const Profile = ({ currentUser }) => {
                         <a href="#" className="ml-1.5 text-[15px] text-gray-400">
                             {user?.subs?.length} Subscription
                         </a>
+                        <a href="#" className="ml-1.5 text-[15px] text-gray-400">
+                            {user?.subs?.length} Subscribers
+                        </a>
                         <div className='flex flex-col'>
                             {currentUser?._id !== userId.id && (
                                 <div>
@@ -237,53 +242,14 @@ const Profile = ({ currentUser }) => {
                 <div>
                     <h1 className="text-[28px] font-semibold ml-10"> Playlists </h1>
                 </div>
-                <div className="flex mt-10">
-                    {userPlaylist.map((playlist) => (
-                        <div key={playlist._id} className="flex ml-10">
-                            <Link
-                                className="flex flex-col"
-                                to={`/podcastlist/${playlist._id}`}
-                            >
-                                <div>
-                                    <img
-                                        src={`http://localhost:8000/assets/${playlist.imageUrl}`}
-                                        alt={playlist.title}
-                                        className="w-48 rounded-xl max-h-[110px]"
-                                    />
-                                </div>
-                                <div className="flex flex-col mt-2">
-                                    <h1 className="text-[18px] font-medium">
-
-                                        {playlist.title}
-                                    </h1>
-                                    <h1 className="text-[#727272]"> {playlist.createdBy} </h1>
-                                </div>
-                            </Link>
-                        </div>
-                    ))}
-                </div>
+                <Playlists userPlaylist={userPlaylist} />
             </div>
 
             <div className="flex flex-col w-full mt-32 ml-10 mb-60">
                 <div>
                     <h1 className="text-[28px] font-semibold ml-10"> Subscriptions </h1>
                 </div>
-                <div className="flex mt-10">
-                    {getSubs?.map((sub, index) => (
-                        <Link key={index} to={`/profile/${sub._id}`}>
-                            <div className="flex flex-col ml-10">
-                                <div className="flex flex-col">
-                                    <div>
-                                        <img src={`http://localhost:8000/assets/${sub.profileImage}` || sub.profileImage} alt={sub.firstName} className="w-32 rounded-xl max-h-[110px]" />
-                                    </div>
-                                    <div className='mt-2'>
-                                        <h1 className='text-[18px] font-medium'> {sub.firstName} {sub.lastName} </h1>
-                                    </div>
-                                </div>
-                            </div>
-                        </Link>
-                    ))}
-                </div>
+                <Subscription getSubs={getSubs} />
             </div>
         </div>
     );
